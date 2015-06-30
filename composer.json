@@ -1,0 +1,23 @@
+{
+  "name": "minetro/normgen",
+  "description": "Nextras ORM Generator",
+  "type": "library",
+  "license": ["BSD-3-Clause"],
+  "homepage": "https://github.com/minetro/normgen",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "http://jfx.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.5",
+    "nette/database": ">=2.3.0",
+    "nette/php-generator": ">=2.3.0",
+    "nette/utils": ">=2.3.0",
+    "tracy/tracy": ">=2.3.0"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}

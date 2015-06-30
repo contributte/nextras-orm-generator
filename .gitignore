@@ -1,0 +1,7 @@
+# Folders
+/vendor
+.idea
+# Files
+/composer.lock
+/tests/*.log
+/tests/tmp
