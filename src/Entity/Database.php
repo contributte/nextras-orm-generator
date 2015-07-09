@@ -21,6 +21,7 @@ class Database
      */
     public function addTable(Table $table)
     {
+        $table->attach($this);
         $this->tables[] = $table;
     }
 

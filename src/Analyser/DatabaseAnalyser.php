@@ -4,6 +4,7 @@ namespace Minetro\Normgen\Analyser;
 
 use Minetro\Normgen\Entity\Column;
 use Minetro\Normgen\Entity\Database;
+use Minetro\Normgen\Entity\ForeignKey;
 use Minetro\Normgen\Entity\Table;
 use Minetro\Normgen\Generator\Entity\ColumnTypes;
 use Minetro\Normgen\Utils\Helpers;
@@ -128,7 +129,8 @@ class DatabaseAnalyser implements Analyser
         foreach ($keys as $key) {
             $column = $table->getColumn($key['local']);
 
-            $foreign = $column->getForeignKey();
+            $column->setForeignKey($foreign = new ForeignKey());
+            $foreign->setSourceTable($table->getName());
             $foreign->setSourceColumn($key['local']);
             $foreign->setReferenceTable($key['table']);
             $foreign->setReferenceColumn($key['foreign']);

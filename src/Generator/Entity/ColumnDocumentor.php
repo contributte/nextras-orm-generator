@@ -3,53 +3,68 @@
 namespace Minetro\Normgen\Generator\Entity;
 
 use Minetro\Normgen\Entity\Column;
+use Minetro\Normgen\Entity\ForeignKey;
+use Minetro\Normgen\Entity\PhpDoc;
+use Minetro\Normgen\Entity\PhpRelDoc;
+use Minetro\Normgen\Entity\Table;
 use Minetro\Normgen\Utils\Helpers;
-use Nette\PhpGenerator\ClassType;
-use Nette\PhpGenerator\PhpNamespace;
+use Minetro\Resolver\IEntityResolver;
+use Nette\InvalidStateException;
 use Nette\Utils\Strings;
 
 class ColumnDocumentor
 {
 
     /**
-     * @param PhpNamespace $namespace
-     * @param ClassType $class
      * @param Column $column
-     * @return string
+     * @param IEntityResolver $resolver
+     * @return void
      */
-    public function document(PhpNamespace $namespace, ClassType $class, Column $column)
+    public function doPrepare(Column $column, IEntityResolver $resolver)
     {
-        $doc = $column->getPhpDoc();
+        $column->setPhpDoc($doc = new PhpDoc());
 
         // Annotation
-        $doc->append('@param');
+        $doc->setAnnotation('@property');
 
         // Type
         if ($column->isNullable()) {
-            $doc->str($this->getRealType($column));
-            $doc->append('|NULL');
+            $doc->setType($this->getRealType($column) . '|NULL');
         } else {
-            $doc->append($this->getRealType($column));
+            $doc->setType($this->getRealType($column));
         }
 
         // Variable
-        $doc->append(sprintf('$%s', Helpers::camelCase($column->getName())));
-
-        // Enum
-        if (!empty($enum = $column->getEnum())) {
-            $doc->append(sprintf('{enum self::%s_*}', Strings::upper($column->getName())));
-        }
+        $doc->setVariable(Helpers::camelCase($column->getName()));
 
         // Defaults
         if ($column->getDefault() !== NULL) {
-            $doc->append(sprintf('{default %s}', $this->getRealDefault($column)));
+            $doc->setDefault($this->getRealDefault($column));
+        }
+
+        // Enum
+        if (!empty($enum = $column->getEnum())) {
+            $doc->setEnum(Strings::upper($column->getName()));
         }
 
         // Relations
+        if (($key = $column->getForeignKey()) !== NULL) {
+            // Find foreign entity table
+            $ftable = $this->getForeignEntityName($column, $key);
 
-        // Virtual
+            // Update type to Entity name
+            $doc->setType($resolver->resolveEntityName($ftable));
+            $doc->setRelation($relDoc = new PhpRelDoc());
 
-        return $doc;
+            $relDoc->setType('???');
+            $relDoc->setEntity($resolver->resolveEntityName($ftable));
+            $relDoc->setVariable('???');
+        }
+    }
+
+    public function doDocument(Column $column)
+    {
+        return (string)$column->getPhpDoc();
     }
 
     /**
@@ -78,6 +93,25 @@ class ColumnDocumentor
             default:
                 return $column->getDefault();
         }
+    }
+
+
+    /**
+     * @param Column $column
+     * @param ForeignKey $key
+     * @return Table
+     */
+    protected function getForeignEntityName(Column $column, ForeignKey $key)
+    {
+        $tables = $column->getTable()->getDatabase()->getTables();
+
+        foreach ($tables as $table) {
+            if ($key->getReferenceTable() === $table->getName()) {
+                return $table;
+            }
+        }
+
+        throw new InvalidStateException('Foreign table not found. Please review analyser.');
     }
 
 }

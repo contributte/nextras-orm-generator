@@ -25,6 +25,11 @@ class Helpers
         'BOOL' => ColumnTypes::TYPE_BOOL,
     );
 
+    /** @var array */
+    public static $mnDelimiters = [
+        '_to_', '_has_', '_x_'
+    ];
+
     /**
      * @param string $s
      * @return string
@@ -53,6 +58,16 @@ class Helpers
             }
         }
         return $cache[$type];
+    }
+
+    /**
+     * @param string $s
+     * @param string $r
+     * @return string
+     */
+    public static function  stripMnDelimiters($s, $r = NULL)
+    {
+        return str_replace(self::$mnDelimiters, $r, $s);
     }
 
 }

@@ -3,15 +3,39 @@
 namespace Minetro\Normgen\Entity;
 
 use InvalidArgumentException;
+use Minetro\Normgen\Exception\InvalidAttachException;
 
 class Table
 {
+
+    /** @var Database */
+    private $database;
 
     /** @var string */
     private $name;
 
     /** @var Column[] */
     private $columns = [];
+
+    /**
+     * @param Database $database
+     */
+    public function attach(Database $database)
+    {
+        if ($this->database) {
+            throw new InvalidAttachException('Table is already attached to database.');
+        }
+
+        $this->database = $database;
+    }
+
+    /**
+     * @return Database
+     */
+    public function getDatabase()
+    {
+        return $this->database;
+    }
 
     /**
      * @return Column[]
@@ -39,6 +63,7 @@ class Table
      */
     public function addColumn(Column $column)
     {
+        $column->attach($this);
         $this->columns[$column->getName()] = $column;
     }
 

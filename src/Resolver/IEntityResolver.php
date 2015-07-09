@@ -4,7 +4,7 @@ namespace Minetro\Resolver;
 
 use Minetro\Normgen\Entity\Table;
 
-interface Resolver
+interface IEntityResolver extends IFilenameResolver
 {
 
     /**
@@ -18,5 +18,4 @@ interface Resolver
      * @return string
      */
     function resolveEntityFilename(Table $table);
-
 }

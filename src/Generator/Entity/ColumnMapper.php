@@ -15,7 +15,7 @@ class ColumnMapper
      * @param ClassType $class
      * @param Column $column
      */
-    public function map(PhpNamespace $namespace, ClassType $class, Column $column)
+    public function doMapping(PhpNamespace $namespace, ClassType $class, Column $column)
     {
 
         switch ($column->getType()) {

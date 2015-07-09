@@ -6,6 +6,9 @@ class ForeignKey
 {
 
     /** @var string */
+    private $sourceTable;
+
+    /** @var string */
     private $sourceColumn;
 
     /** @var string */
@@ -13,6 +16,22 @@ class ForeignKey
 
     /** @var string */
     private $referenceColumn;
+
+    /**
+     * @return string
+     */
+    public function getSourceTable()
+    {
+        return $this->sourceTable;
+    }
+
+    /**
+     * @param string $sourceTable
+     */
+    public function setSourceTable($sourceTable)
+    {
+        $this->sourceTable = $sourceTable;
+    }
 
     /**
      * @return string

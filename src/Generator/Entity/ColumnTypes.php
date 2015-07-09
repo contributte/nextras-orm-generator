@@ -9,7 +9,7 @@ interface ColumnTypes
 
     const NATIVE_TYPE_ENUM = 'ENUM';
 
-    // Native reges
+    // Native regex
 
     const NATIVE_REGEX_ENUM = '#\'(.*)\'#U';
 

@@ -2,8 +2,13 @@
 
 namespace Minetro\Normgen\Entity;
 
+use Minetro\Normgen\Exception\InvalidAttachException;
+
 class Column
 {
+
+    /** @var Table */
+    private $table;
 
     /** @var string */
     private $name;
@@ -40,6 +45,26 @@ class Column
 
     /** @var ForeignKey */
     private $foreignKey;
+
+    /**
+     * @param Table $table
+     */
+    public function attach(Table $table)
+    {
+        if ($this->table) {
+            throw new InvalidAttachException('Column is already attached to table.');
+        }
+
+        $this->table = $table;
+    }
+
+    /**
+     * @return Table
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
 
     /**
      * @return string
@@ -226,11 +251,22 @@ class Column
      */
     public function getForeignKey()
     {
-        if (!$this->foreignKey) {
-            $this->foreignKey = new ForeignKey();
-        }
-
         return $this->foreignKey;
+    }
+
+    /**
+     * @param string $sourceColumn
+     * @param string $referenceTable
+     * @param string $referenceColumn
+     */
+    public function createForeignKey($sourceColumn, $referenceTable, $referenceColumn)
+    {
+        $key = new ForeignKey();
+        $key->setSourceColumn($sourceColumn);
+        $key->setReferenceTable($referenceTable);
+        $key->setReferenceColumn($referenceColumn);
+
+        $this->foreignKey = $key;
     }
 
     /**
