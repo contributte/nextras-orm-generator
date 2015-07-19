@@ -13,11 +13,15 @@ require __DIR__ . '/../../../bootstrap.php';
  * Helpers::camelCase
  */
 test(function () {
+    Assert::equal('foo', Helpers::camelCase('foo'));
+    Assert::equal('fooBar', Helpers::camelCase('fooBar'));
     Assert::equal('fooBar', Helpers::camelCase('foo bar'));
     Assert::equal('fooBar', Helpers::camelCase('foo  bar'));
-    Assert::equal('fooBar', Helpers::camelCase('foo BAR'));
+    Assert::equal('fooFooFooFoo', Helpers::camelCase('foo foo foo foo'));
+    Assert::equal('fooBar', Helpers::camelCase(' foo bar '));
     Assert::equal('fooBar1', Helpers::camelCase('foo bar 1'));
     Assert::equal('fooBar1', Helpers::camelCase('foo bar 1'));
+    Assert::equal('1FooBar1', Helpers::camelCase('1 foo bar 1'));
     Assert::equal('fooBar1', Helpers::camelCase('foo !@#$%^&*{}[]() bar 1'));
 });
 

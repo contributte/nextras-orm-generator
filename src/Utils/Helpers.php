@@ -39,6 +39,7 @@ class Helpers
      */
     public static function camelCase($s)
     {
+        $s = trim($s);
         $s = preg_replace('#[^a-zA-Z0-9_-]#', ' ', $s);
         $s = preg_replace('#[_-](?=[a-z])#', ' ', $s);
         $s = substr(ucwords('x' . $s), 1);
