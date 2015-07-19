@@ -2,8 +2,6 @@
 
 namespace Minetro\Normgen\Utils;
 
-use Minetro\Normgen\Generator\Entity\ColumnTypes;
-
 /**
  * Most of this snippets taken from cool Nette Framework
  *
@@ -11,6 +9,11 @@ use Minetro\Normgen\Generator\Entity\ColumnTypes;
  */
 class Helpers
 {
+    /** Namespace separator */
+    const NS = '\\';
+
+    /** Directory separator */
+    const DS = DIRECTORY_SEPARATOR;
 
     /** @var array */
     public static $typePatterns = array(
@@ -36,6 +39,7 @@ class Helpers
      */
     public static function camelCase($s)
     {
+        $s = preg_replace('#[^a-zA-Z0-9_-]#', ' ', $s);
         $s = preg_replace('#[_-](?=[a-z])#', ' ', $s);
         $s = substr(ucwords('x' . $s), 1);
         $s = str_replace(' ', '', $s);
@@ -65,7 +69,7 @@ class Helpers
      * @param string $r
      * @return string
      */
-    public static function  stripMnDelimiters($s, $r = NULL)
+    public static function stripMnDelimiters($s, $r = NULL)
     {
         return str_replace(self::$mnDelimiters, $r, $s);
     }

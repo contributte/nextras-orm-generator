@@ -2,6 +2,8 @@
 
 namespace Minetro\Normgen\Entity;
 
+use Minetro\Normgen\Exception\InvalidStateException;
+
 class Database
 {
 
@@ -25,4 +27,19 @@ class Database
         $this->tables[] = $table;
     }
 
+    /**
+     * @param Column $column
+     * @param ForeignKey $key
+     * @return Table
+     */
+    public function getForeignTable($name)
+    {
+        foreach ($this->tables as $table) {
+            if ($name === $table->getName()) {
+                return $table;
+            }
+        }
+
+        throw new InvalidStateException('Foreign table not found. Please review analyser.');
+    }
 }

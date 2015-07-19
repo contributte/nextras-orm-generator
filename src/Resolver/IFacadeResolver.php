@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Resolver;
+namespace Minetro\Normgen\Resolver;
 
 use Minetro\Normgen\Entity\Table;
 
@@ -12,6 +12,12 @@ interface IFacadeResolver extends IFilenameResolver
      * @return string
      */
     function resolveFacadeName(Table $table);
+
+    /**
+     * @param Table $table
+     * @return string
+     */
+    function resolveFacadeNamespace(Table $table);
 
     /**
      * @param Table $table

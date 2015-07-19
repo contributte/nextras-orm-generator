@@ -1,17 +1,25 @@
 <?php
 
-use Minetro\Normgen\Analyser\DatabaseAnalyser;
-use Minetro\Normgen\Config;
-use Minetro\Normgen\Normgen;
+use Minetro\Normgen\Analyser\Database\DatabaseAnalyser;
+use Minetro\Normgen\SimpleFactory;
 use Tracy\Debugger;
+use Minetro\Normgen\Config\Impl\SeparateConfig;
+use Minetro\Normgen\Config\Impl\TogetherConfig;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Debugger::enable(Debugger::DEVELOPMENT, __DIR__);
 
-$generator = new Normgen(
-    new Config(['output' => __DIR__ . '/model']),
+$factory = new SimpleFactory(
+    new SeparateConfig(['output' => __DIR__ . '/model/separate-' . time()]),
     new DatabaseAnalyser('mysql:host=localhost;dbname=burza', 'root')
 );
 
-$generator->generate();
+$factory->create()->generate();
+
+$factory = new SimpleFactory(
+    new TogetherConfig(['output' => __DIR__ . '/model/together-' . time()]),
+    new DatabaseAnalyser('mysql:host=localhost;dbname=burza', 'root')
+);
+
+$factory->create()->generate();

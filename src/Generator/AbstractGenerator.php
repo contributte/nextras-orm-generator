@@ -1,11 +1,12 @@
 <?php
 
-namespace Minetro\Normgen;
+namespace Minetro\Normgen\Generator;
 
+use Minetro\Normgen\Config\Config;
 use Minetro\Normgen\Entity\Database;
 use Nette\Utils\FileSystem;
 
-abstract class AbstractGenerator
+abstract class AbstractGenerator implements IGenerator
 {
 
     /** @var Config */
@@ -22,13 +23,12 @@ abstract class AbstractGenerator
     /**
      * Generate file
      *
-     * @param string $folder
      * @param string $filename
      * @param string $code
      */
-    protected function generateFile($folder, $filename, $code)
+    protected function generateFile($filename, $code)
     {
-        FileSystem::write($this->config->get('output') . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $filename, "<?php\n\n$code");
+        FileSystem::write($this->config->get('output') . DIRECTORY_SEPARATOR . $filename, "<?php\n\n$code");
     }
 
     /**
