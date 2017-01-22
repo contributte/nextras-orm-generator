@@ -8,22 +8,28 @@ use Minetro\Normgen\Generator\AbstractGenerator;
 use Minetro\Normgen\Resolver\IRepositoryResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
+use Minetro\Normgen\Resolver\IEntityResolver;
 
 class RepositoryGenerator extends AbstractGenerator
 {
 
     /** @var IRepositoryResolver */
     private $resolver;
+    
+    /** @var IEntityResolver */
+    private $entityResolver;
 
     /**
      * @param Config $config
      * @param IRepositoryResolver $resolver
+     * @param IEntityResolver $entityResolver
      */
-    function __construct(Config $config, IRepositoryResolver $resolver)
+    function __construct(Config $config, IRepositoryResolver $resolver, IEntityResolver $entityResolver)
     {
         parent::__construct($config);
 
         $this->resolver = $resolver;
+        $this->entityResolver = $entityResolver;
     }
 
     /**
@@ -42,6 +48,13 @@ class RepositoryGenerator extends AbstractGenerator
                 $class->setExtends($extends);
             }
 
+            $entityName = $this->entityResolver->resolveEntityName($table);
+            $class->addMethod("getEntityClassNames")
+				->addDocument("@return array")
+				->setVisibility('public')
+				->setStatic(true)
+				->addBody("return [$entityName::class];");
+            
             // Save file
             $this->generateFile($this->resolver->resolveRepositoryFilename($table), (string)$namespace);
         }

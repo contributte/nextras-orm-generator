@@ -47,7 +47,7 @@ final class SimpleFactory
         }
 
         $normgen->setEntityGenerator(new EntityGenerator($this->config, $resolver));
-        $normgen->setRepositoryGenerator(new RepositoryGenerator($this->config, $resolver));
+        $normgen->setRepositoryGenerator(new RepositoryGenerator($this->config, $resolver, $resolver));
         $normgen->setMapperGenerator(new MapperGenerator($this->config, $resolver));
         $normgen->setFacadeGenerator(new FacadeGenerator($this->config, $resolver));
 
