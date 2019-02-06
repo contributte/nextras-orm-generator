@@ -50,7 +50,7 @@ class RepositoryGenerator extends AbstractGenerator
 
             $entityName = $this->entityResolver->resolveEntityName($table);
             $class->addMethod("getEntityClassNames")
-				->addDocument("@return array")
+				->addComment("@return array")
 				->setVisibility('public')
 				->setStatic(true)
 				->addBody("return [$entityName::class];");
