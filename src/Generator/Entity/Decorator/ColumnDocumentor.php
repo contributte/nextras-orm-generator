@@ -79,7 +79,7 @@ class ColumnDocumentor implements IDecorator
         }
 
         // Append phpDoc to class
-        $class->addDocument((string)$column->getPhpDoc());
+        $class->addComment((string)$column->getPhpDoc());
     }
 
     /**
