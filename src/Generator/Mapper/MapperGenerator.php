@@ -42,6 +42,11 @@ class MapperGenerator extends AbstractGenerator
                 $class->setExtends($extends);
             }
 
+			$class->addMethod('getTableName')
+				->setBody('return \'' . $table->getName() . '\';')
+				->setReturnType('string')
+				->setVisibility('public');
+
             // Save file
             $this->generateFile($this->resolver->resolveMapperFilename($table), (string)$namespace);
         }

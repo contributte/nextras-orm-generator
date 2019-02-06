@@ -30,29 +30,34 @@ class Config implements \ArrayAccess
         'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
         // ORM
         'orm.namespace' => NULL,
+		'orm.singularize' => FALSE,
         // Entity
         'entity.folder' => NULL,
         'entity.namespace' => NULL,
         'entity.extends' => NULL,
         'entity.name.suffix' => NULL,
+		'entity.name.singularize' => FALSE,
         'entity.filename.suffix' => NULL,
         // Repository
         'repository.folder' => NULL,
         'repository.namespace' => NULL,
         'repository.extends' => NULL,
         'repository.name.suffix' => NULL,
+		'repository.name.singularize' => FALSE,
         'repository.filename.suffix' => NULL,
         // Mapper
         'mapper.folder' => NULL,
         'mapper.namespace' => NULL,
         'mapper.extends' => NULL,
         'mapper.name.suffix' => NULL,
+		'mapper.name.singularize' => FALSE,
         'mapper.filename.suffix' => NULL,
         // Facade
         'facade.folder' => NULL,
         'facade.namespace' => NULL,
         'facade.extends' => NULL,
         'facade.name.suffix' => NULL,
+		'facade.name.singularize' => FALSE,
         'facade.filename.suffix' => NULL,
     ];
 
