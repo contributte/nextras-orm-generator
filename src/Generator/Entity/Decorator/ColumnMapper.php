@@ -24,13 +24,13 @@ class ColumnMapper implements IDecorator
 
             // Map: DateTime
             case ColumnTypes::TYPE_DATETIME:
-                $column->setType('DateTime');
+                $column->setType('DateTimeImmutable');
 
                 if ($column->getDefault() !== NULL) {
                     $column->setDefault('now');
                 }
 
-                $namespace->addUse('Nette\Utils\DateTime');
+                $namespace->addUse('Nextras\Dbal\Utils\DateTimeImmutable');
                 break;
 
             // Map: Enum
