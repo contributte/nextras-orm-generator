@@ -2,6 +2,7 @@
 
 namespace Minetro\Normgen\Resolver\Impl;
 
+use Doctrine\Common\Inflector\Inflector;
 use Minetro\Normgen\Config\Config;
 use Minetro\Normgen\Entity\Table;
 use Minetro\Normgen\Resolver\IEntityResolver;
@@ -54,8 +55,13 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
      * @param Table $table
      * @return string
      */
-    protected function table(Table $table)
+    protected function table(Table $table, $singularize = FALSE)
     {
-        return $this->normalize(ucfirst($table->getName()));
+        $name = $this->normalize(ucfirst($table->getName()));
+
+        if ($singularize) {
+				$name = Inflector::singularize($name);
+			}
+        return $name;
     }
 }

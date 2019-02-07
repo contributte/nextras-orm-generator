@@ -2,6 +2,7 @@
 
 namespace Minetro\Normgen\Resolver\Impl;
 
+use Doctrine\Common\Inflector\Inflector;
 use Minetro\Normgen\Entity\Table;
 use Minetro\Normgen\Resolver\IFilenameResolver;
 
@@ -14,7 +15,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveEntityName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('entity.name.suffix'));
+    	return $this->resolveNameFor('entity', $table);
     }
 
     /**
@@ -32,7 +33,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveEntityFilename(Table $table)
     {
-        return $this->config->get('entity.folder') . DIRECTORY_SEPARATOR . $this->normalize(ucfirst($table->getName()) . $this->config->get('entity.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+		return $this->resolveFilenameFor('entity', $table);
     }
 
     /**
@@ -41,7 +42,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveRepositoryName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('repository.name.suffix'));
+		return $this->resolveNameFor('repository', $table);
     }
 
     /**
@@ -59,7 +60,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveRepositoryFilename(Table $table)
     {
-        return $this->config->get('repository.folder') . DIRECTORY_SEPARATOR . $this->normalize(ucfirst($table->getName()) . $this->config->get('repository.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+		return $this->resolveFilenameFor('repository', $table);
     }
 
     /**
@@ -68,7 +69,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveMapperName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('mapper.name.suffix'));
+		return $this->resolveNameFor('mapper', $table);
     }
 
     /**
@@ -77,7 +78,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveMapperFilename(Table $table)
     {
-        return $this->config->get('mapper.folder') . DIRECTORY_SEPARATOR . $this->normalize(ucfirst($table->getName()) . $this->config->get('mapper.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+		return $this->resolveFilenameFor('mapper', $table);
     }
 
     /**
@@ -95,7 +96,7 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveFacadeName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('facade.name.suffix'));
+    	return $this->resolveNameFor('facade', $table);
     }
 
     /**
@@ -113,7 +114,36 @@ class SimpleSeparateResolver extends SimpleResolver
      */
     public function resolveFacadeFilename(Table $table)
     {
-        return $this->config->get('facade.folder') . DIRECTORY_SEPARATOR . $this->normalize(ucfirst($table->getName()) . $this->config->get('facade.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+    	return $this->resolveFilenameFor('facade', $table);
     }
 
+	/**
+	 * @param $tpe
+	 * @param Table $table
+	 * @return string
+	 */
+    protected function resolveFilenameFor($type, Table $table)
+	{
+		$name = $this->normalize(ucfirst($table->getName()));
+		if($this->config->get($type . '.name.singularize')) {
+			$name = Inflector::singularize($name);
+		}
+		$name .= $this->config->get($type . '.filename.suffix');
+		return $this->config->get($type . '.folder') . DIRECTORY_SEPARATOR . $name . '.' . IFilenameResolver::PHP_EXT;
+	}
+
+	/**
+	 * @param $type
+	 * @param Table $table
+	 * @return string
+	 */
+	protected function resolveNameFor($type, Table $table)
+	{
+		$name = $this->normalize(ucfirst($table->getName()));
+		if($this->config->get($type . '.name.singularize')) {
+			$name = Inflector::singularize($name);
+		}
+		$name .= $this->config->get($type . '.name.suffix');
+		return $name;
+	}
 }

@@ -2,6 +2,7 @@
 
 namespace Minetro\Normgen\Resolver\Impl;
 
+use Doctrine\Common\Inflector\Inflector;
 use Minetro\Normgen\Entity\Table;
 use Minetro\Normgen\Resolver\IFilenameResolver;
 use Minetro\Normgen\Utils\Helpers;
@@ -15,7 +16,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveEntityName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('entity.name.suffix'));
+		return $this->resolveName('entity', $table);
     }
 
     /**
@@ -24,7 +25,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveEntityNamespace(Table $table)
     {
-        return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table);
+        return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table, $this->config->get('orm.singularize'));
     }
 
     /**
@@ -33,8 +34,8 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveEntityFilename(Table $table)
     {
-        return $this->table($table) . Helpers::DS . $this->normalize(ucfirst($table->getName()) . $this->config->get('entity.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
-    }
+		return $this->resolveFilenameFor('entity', $table);
+     }
 
     /**
      * @param Table $table
@@ -42,7 +43,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveRepositoryName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('repository.name.suffix'));
+		return $this->resolveName('repository', $table);
     }
 
     /**
@@ -60,7 +61,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveRepositoryFilename(Table $table)
     {
-        return $this->table($table) . Helpers::DS . $this->normalize(ucfirst($table->getName()) . $this->config->get('repository.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+        return $this->resolveFilenameFor('repository', $table);
     }
 
     /**
@@ -69,7 +70,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveMapperName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('mapper.name.suffix'));
+		return $this->resolveName('mapper', $table);
     }
 
     /**
@@ -78,7 +79,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveMapperNamespace(Table $table)
     {
-        return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table);
+        return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table, $this->config->get('orm.singularize'));
     }
 
     /**
@@ -87,7 +88,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveMapperFilename(Table $table)
     {
-        return $this->table($table) . Helpers::DS . $this->normalize(ucfirst($table->getName()) . $this->config->get('mapper.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+        return $this->resolveFilenameFor('mapper', $table);
     }
 
     /**
@@ -96,8 +97,39 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveFacadeName(Table $table)
     {
-        return $this->normalize(ucfirst($table->getName()) . $this->config->get('facade.name.suffix'));
+    	return $this->resolveName('facade', $table);
     }
+
+	/**
+	 * @param string $type (entity,repository,mapper,facade)
+	 * @param $table
+	 * @return string
+	 */
+    protected function resolveName($type, Table $table)
+	{
+		$name = ucfirst($table->getName());
+		if($this->config->get($type . '.name.singularize')) {
+			$name = Inflector::singularize($name);
+		}
+		$name .= $this->config->get( $type . '.name.suffix');
+		return $this->normalize($name);
+	}
+
+	/**
+	 * @param string $type
+	 * @param Table $table
+	 * @return string
+	 */
+	protected function resolveFilenameFor($type, Table $table)
+	{
+		$folder = $this->table($table, $this->config->get('orm.singularize'));
+		$name = ucfirst($table->getName());
+		if($this->config->get($type . '.name.singularize')) {
+			$name = Inflector::singularize($name);
+		}
+		$filename = $this->normalize($name . $this->config->get($type . '.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+		return $folder . Helpers::DS . $filename;
+	}
 
     /**
      * @param Table $table
@@ -114,7 +146,7 @@ class SimpleTogetherResolver extends SimpleResolver
      */
     public function resolveFacadeFilename(Table $table)
     {
-        return $this->table($table) . Helpers::DS . $this->normalize(ucfirst($table->getName()) . $this->config->get('facade.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+        return $this->resolveFilenameFor('facade', $table);
     }
 
 }
