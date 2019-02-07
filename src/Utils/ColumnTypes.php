@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Normgen\Utils;
+namespace Contributte\Nextras\Orm\Generator\Utils;
 
 interface ColumnTypes
 {

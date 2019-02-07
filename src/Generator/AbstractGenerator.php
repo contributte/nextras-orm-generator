@@ -1,9 +1,9 @@
 <?php
 
-namespace Minetro\Normgen\Generator;
+namespace Contributte\Nextras\Orm\Generator\Generator;
 
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
 use Nette\Utils\FileSystem;
 
 abstract class AbstractGenerator implements IGenerator

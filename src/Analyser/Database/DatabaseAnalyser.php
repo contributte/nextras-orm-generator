@@ -1,14 +1,14 @@
 <?php
 
-namespace Minetro\Normgen\Analyser\Database;
+namespace Contributte\Nextras\Orm\Generator\Analyser\Database;
 
-use Minetro\Normgen\Analyser\IAnalyser;
-use Minetro\Normgen\Entity\Column;
-use Minetro\Normgen\Entity\Database;
-use Minetro\Normgen\Entity\ForeignKey;
-use Minetro\Normgen\Entity\Table;
-use Minetro\Normgen\Utils\ColumnTypes;
-use Minetro\Normgen\Utils\Helpers;
+use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
+use Contributte\Nextras\Orm\Generator\Entity\Column;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Entity\ForeignKey;
+use Contributte\Nextras\Orm\Generator\Entity\Table;
+use Contributte\Nextras\Orm\Generator\Utils\ColumnTypes;
+use Contributte\Nextras\Orm\Generator\Utils\Helpers;
 use Nette\Database\Connection;
 use Nette\Database\ISupplementalDriver;
 use Nette\Utils\Strings;

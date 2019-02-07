@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Entity;
+namespace Contributte\Nextras\Orm\Generator\Entity;
 
-use Minetro\Normgen\Utils\DocBuilder;
+use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
 
 class PhpDoc
 {

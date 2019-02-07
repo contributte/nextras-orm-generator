@@ -1,14 +1,14 @@
 <?php
 
-namespace Minetro\Normgen\Generator\Repository;
+namespace Contributte\Nextras\Orm\Generator\Generator\Repository;
 
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Entity\Database;
-use Minetro\Normgen\Generator\AbstractGenerator;
-use Minetro\Normgen\Resolver\IRepositoryResolver;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Resolver\IRepositoryResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
-use Minetro\Normgen\Resolver\IEntityResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 
 class RepositoryGenerator extends AbstractGenerator
 {

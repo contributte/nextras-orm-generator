@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Config\Impl;
+namespace Contributte\Nextras\Orm\Generator\Config\Impl;
 
-use Minetro\Normgen\Config\Config;
+use Contributte\Nextras\Orm\Generator\Config\Config;
 
 class SeparateConfig extends Config
 {

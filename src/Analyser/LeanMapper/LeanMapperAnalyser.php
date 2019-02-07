@@ -1,10 +1,10 @@
 <?php
 
-namespace Minetro\Normgen\Analyser\Database;
+namespace Contributte\Nextras\Orm\Generator\Analyser\Database;
 
-use Minetro\Normgen\Analyser\IAnalyser;
-use Minetro\Normgen\Entity\Database;
-use Minetro\Normgen\Exception\NotImplementedException;
+use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Exception\NotImplementedException;
 
 class LeanMapperAnalyser implements IAnalyser
 {

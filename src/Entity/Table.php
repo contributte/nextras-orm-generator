@@ -1,9 +1,9 @@
 <?php
 
-namespace Minetro\Normgen\Entity;
+namespace Contributte\Nextras\Orm\Generator\Entity;
 
 use InvalidArgumentException;
-use Minetro\Normgen\Exception\InvalidAttachException;
+use Contributte\Nextras\Orm\Generator\Exception\InvalidAttachException;
 
 class Table
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Minetro\Normgen\Generator\Mapper;
+namespace Contributte\Nextras\Orm\Generator\Generator\Mapper;
 
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Entity\Database;
-use Minetro\Normgen\Generator\AbstractGenerator;
-use Minetro\Normgen\Resolver\IMapperResolver;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Resolver\IMapperResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
 

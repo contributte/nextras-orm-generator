@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Normgen\Config;
+namespace Contributte\Nextras\Orm\Generator\Config;
 
 use Nette\InvalidStateException;
 
@@ -23,6 +23,7 @@ class Config implements \ArrayAccess
         'generator.generate.repositories' => FALSE,
         'generator.generate.mappers' => FALSE,
         'generator.generate.facades' => FALSE,
+		'generator.generate.model' => FALSE,
         'generator.entity.exclude.primary' => FALSE,
         // NextrasORM
         'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
@@ -59,6 +60,8 @@ class Config implements \ArrayAccess
         'facade.name.suffix' => NULL,
 		'facade.name.singularize' => FALSE,
         'facade.filename.suffix' => NULL,
+
+		'nextras.orm.class.model' => 'Nextras\Orm\Model\Model'
     ];
 
     /** @var array */

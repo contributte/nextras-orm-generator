@@ -3,11 +3,11 @@
 /**
  * Test: Utils\DocBuilder
  */
+require __DIR__ . '/../../bootstrap.php';
 
-use Minetro\Normgen\Utils\DocBuilder;
+use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
 
 test(function () {
     $b = new DocBuilder();

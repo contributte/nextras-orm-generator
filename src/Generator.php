@@ -1,12 +1,12 @@
 <?php
 
-namespace Minetro\Normgen;
+namespace Contributte\Nextras\Orm\Generator;
 
-use Minetro\Normgen\Analyser\IAnalyser;
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Generator\IGenerator;
+use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Generator\IGenerator;
 
-class Normgen
+class Generator
 {
 
     /** @var Config */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Normgen\Resolver;
+namespace Contributte\Nextras\Orm\Generator\Resolver;
 
 interface IFilenameResolver
 {

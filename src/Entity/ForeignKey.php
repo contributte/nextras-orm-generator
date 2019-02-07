@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Normgen\Entity;
+namespace Contributte\Nextras\Orm\Generator\Entity;
 
 class ForeignKey
 {

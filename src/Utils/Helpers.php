@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Normgen\Utils;
+namespace Contributte\Nextras\Orm\Generator\Utils;
 
 /**
  * Most of this snippets taken from cool Nette Framework

@@ -1,10 +1,10 @@
 <?php
 
-namespace Minetro\Normgen\Resolver\Impl;
+namespace Contributte\Nextras\Orm\Generator\Resolver\Impl;
 
 use Doctrine\Common\Inflector\Inflector;
-use Minetro\Normgen\Entity\Table;
-use Minetro\Normgen\Resolver\IFilenameResolver;
+use Contributte\Nextras\Orm\Generator\Entity\Table;
+use Contributte\Nextras\Orm\Generator\Resolver\IFilenameResolver;
 
 class SimpleSeparateResolver extends SimpleResolver
 {

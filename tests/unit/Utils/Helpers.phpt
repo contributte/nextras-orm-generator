@@ -4,10 +4,11 @@
  * Test: Utils\Helpers
  */
 
-use Minetro\Normgen\Utils\Helpers;
+require __DIR__ . '/../../bootstrap.php';
+
+use Contributte\Nextras\Orm\Generator\Utils\Helpers;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
 
 /**
  * Helpers::camelCase
