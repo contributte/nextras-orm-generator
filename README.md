@@ -4,15 +4,10 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 
 -----
 
-[![Build Status](https://img.shields.io/travis/minetro/normgen.svg?style=flat-square)](https://travis-ci.org/minetro/normgen)
+[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-generator.svg?style=flat-square)](https://travis-ci.org/travis/contributte/nextras-orm-generator)
 [![Code coverage](https://img.shields.io/coveralls/minetro/normgen.svg?style=flat-square)](https://coveralls.io/r/minetro/normgen)
-[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/normgen.svg?style=flat-square)](https://packagist.org/packages/minetro/normgen)
-[![Latest stable](https://img.shields.io/packagist/v/minetro/normgen.svg?style=flat-square)](https://packagist.org/packages/minetro/normgen)
-[![HHVM Status](https://img.shields.io/hhvm/minetro/normgen.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/normgen)
-
-## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/minetro/nette.svg?style=flat-square)](https://gitter.im/minetro/nette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
+[![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
 
 ## Install
 
