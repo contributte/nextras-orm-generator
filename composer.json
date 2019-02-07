@@ -1,9 +1,9 @@
 {
-  "name": "minetro/normgen",
+  "name": "contributte/nextras-orm-generator",
   "description": "Nextras ORM Generator",
   "type": "library",
   "license": ["BSD-3-Clause"],
-  "homepage": "https://github.com/minetro/normgen",
+  "homepage": "https://github.com/contributte/nextras-orm-generator",
   "authors": [
     {
       "name": "Milan Felix Sulc",

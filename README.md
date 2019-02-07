@@ -1,4 +1,4 @@
-# Normgen
+# Nextras ORM generator
 
 Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 
@@ -17,7 +17,7 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 ## Install
 
 ```sh
-composer require minetro/normgen:dev-master
+composer require contributte/nextras-orm-generator
 ```
 
 ## ORM
@@ -31,7 +31,7 @@ This little tool can generate:
 
 ## WARNING
 
-This handy tool is currently under mastive active developing. So please be patient.
+This handy tool is currently under massive active developing. So please be patient.
 
 ## Usage
 
