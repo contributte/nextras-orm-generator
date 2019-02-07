@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Generator;
+namespace Contributte\Nextras\Orm\Generator\Generator;
 
-use Minetro\Normgen\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
 
 interface IGenerator
 {

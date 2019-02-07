@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Generator\Entity\Decorator;
+namespace Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator;
 
-use Minetro\Normgen\Entity\Column;
+use Contributte\Nextras\Orm\Generator\Entity\Column;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpNamespace;
 

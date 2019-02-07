@@ -1,16 +1,16 @@
 <?php
 
-namespace Minetro\Normgen;
+namespace Contributte\Nextras\Orm\Generator;
 
-use Minetro\Normgen\Analyser\IAnalyser;
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Exception\InvalidStrategyException;
-use Minetro\Normgen\Generator\Entity\EntityGenerator;
-use Minetro\Normgen\Generator\Facade\FacadeGenerator;
-use Minetro\Normgen\Generator\Mapper\MapperGenerator;
-use Minetro\Normgen\Generator\Repository\RepositoryGenerator;
-use Minetro\Normgen\Resolver\Impl\SimpleSeparateResolver;
-use Minetro\Normgen\Resolver\Impl\SimpleTogetherResolver;
+use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Exception\InvalidStrategyException;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\EntityGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Facade\FacadeGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Mapper\MapperGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Repository\RepositoryGenerator;
+use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleSeparateResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleTogetherResolver;
 
 final class SimpleFactory
 {
@@ -32,11 +32,11 @@ final class SimpleFactory
     }
 
     /**
-     * @return Normgen
+     * @return Generator
      */
     public function create()
     {
-        $normgen = new Normgen($this->config, $this->analyser);
+        $normgen = new Generator($this->config, $this->analyser);
 
         if ($this->config->get('generator.generate.strategy') === Config::STRATEGY_TOGETHER) {
             $resolver = new SimpleTogetherResolver($this->config);

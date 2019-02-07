@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Resolver;
+namespace Contributte\Nextras\Orm\Generator\Resolver;
 
-use Minetro\Normgen\Entity\Table;
+use Contributte\Nextras\Orm\Generator\Entity\Table;
 
 interface IFacadeResolver extends IFilenameResolver
 {

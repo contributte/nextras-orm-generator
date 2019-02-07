@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\Normgen\Analyser;
+namespace Contributte\Nextras\Orm\Generator\Analyser;
 
-use Minetro\Normgen\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
 
 interface IAnalyser
 {

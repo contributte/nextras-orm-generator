@@ -1,14 +1,14 @@
 <?php
 
-namespace Minetro\Normgen\Generator\Entity;
+namespace Contributte\Nextras\Orm\Generator\Generator\Entity;
 
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Entity\Database;
-use Minetro\Normgen\Generator\AbstractGenerator;
-use Minetro\Normgen\Generator\Entity\Decorator\ColumnDocumentor;
-use Minetro\Normgen\Generator\Entity\Decorator\ColumnMapper;
-use Minetro\Normgen\Generator\Entity\Decorator\IDecorator;
-use Minetro\Normgen\Resolver\IEntityResolver;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnDocumentor;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnMapper;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\IDecorator;
+use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
 

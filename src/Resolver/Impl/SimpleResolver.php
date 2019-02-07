@@ -1,16 +1,16 @@
 <?php
 
-namespace Minetro\Normgen\Resolver\Impl;
+namespace Contributte\Nextras\Orm\Generator\Resolver\Impl;
 
 use Doctrine\Common\Inflector\Inflector;
-use Minetro\Normgen\Config\Config;
-use Minetro\Normgen\Entity\Table;
-use Minetro\Normgen\Resolver\IEntityResolver;
-use Minetro\Normgen\Resolver\IFacadeResolver;
-use Minetro\Normgen\Resolver\IFilenameResolver;
-use Minetro\Normgen\Resolver\IMapperResolver;
-use Minetro\Normgen\Resolver\IRepositoryResolver;
-use Minetro\Normgen\Utils\Helpers;
+use Contributte\Nextras\Orm\Generator\Config\Config;
+use Contributte\Nextras\Orm\Generator\Entity\Table;
+use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IFacadeResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IFilenameResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IMapperResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IRepositoryResolver;
+use Contributte\Nextras\Orm\Generator\Utils\Helpers;
 
 abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, IMapperResolver, IFacadeResolver
 {
