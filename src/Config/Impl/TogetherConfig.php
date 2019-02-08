@@ -32,6 +32,8 @@ class TogetherConfig extends Config
         'entity.name.suffix' => NULL,
 		'entity.name.singularize' => FALSE,
         'entity.filename.suffix' => NULL,
+		'entity.generate.column.constant' => FALSE,
+		'entity.column.constants.prefix' => 'COL_',
         // Repository
         'repository.folder' => NULL,
         'repository.namespace' => 'App\Model',

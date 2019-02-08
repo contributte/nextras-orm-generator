@@ -5,12 +5,15 @@ namespace Contributte\Nextras\Orm\Generator\Generator\Entity;
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Entity\Database;
 use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnConstant;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnConstantGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnDocumentor;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnMapper;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\IDecorator;
 use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
+
 
 class EntityGenerator extends AbstractGenerator
 {
@@ -33,23 +36,9 @@ class EntityGenerator extends AbstractGenerator
 
         $this->decorators[] = new ColumnMapper();
         $this->decorators[] = new ColumnDocumentor($resolver);
+		$this->decorators[] = new ColumnConstantGenerator($config);
     }
 
-    /**
-     * @param ColumnMapper $columnMapper
-     */
-    public function setColumnMapper($columnMapper)
-    {
-        $this->columnMapper = $columnMapper;
-    }
-
-    /**
-     * @param ColumnDocumentor $columnDocumentor
-     */
-    public function setColumnDocumentor($columnDocumentor)
-    {
-        $this->columnDocumentor = $columnDocumentor;
-    }
 
     /**
      * @param Database $database
