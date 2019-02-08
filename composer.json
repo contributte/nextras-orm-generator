@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Minetro\\Normgen\\": "src/"
+      "Contributte\\Nextras\\Orm\\Generator\\": "src/"
     }
   }
 }
