@@ -32,6 +32,8 @@ class SeparateConfig extends Config
 		'entity.name.suffix' => null,
 		'entity.name.singularize' => false,
 		'entity.filename.suffix' => null,
+		'entity.generate.column.constant' => false,
+		'entity.column.constants.prefix' => 'COL_',
 		// Repository
 		'repository.folder' => 'Repository',
 		'repository.namespace' => 'App\Model\Repository',

@@ -5,6 +5,7 @@ namespace Contributte\Nextras\Orm\Generator\Generator\Entity;
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Entity\Database;
 use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnConstantGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnDocumentor;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnMapper;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\IDecorator;
@@ -29,16 +30,7 @@ class EntityGenerator extends AbstractGenerator
 
 		$this->decorators[] = new ColumnMapper();
 		$this->decorators[] = new ColumnDocumentor($resolver);
-	}
-
-	public function setColumnMapper(ColumnMapper $columnMapper): void
-	{
-		$this->columnMapper = $columnMapper;
-	}
-
-	public function setColumnDocumentor(ColumnDocumentor $columnDocumentor): void
-	{
-		$this->columnDocumentor = $columnDocumentor;
+		$this->decorators[] = new ColumnConstantGenerator($config);
 	}
 
 	public function generate(Database $database): void
