@@ -12,14 +12,14 @@ Debugger::enable(Debugger::DEVELOPMENT, __DIR__);
 
 $factory = new SimpleFactory(
     new SeparateConfig(['output' => __DIR__ . '/model/separate-' . time()]),
-    new DatabaseAnalyser('mysql:host=localhost;dbname=burza', 'root')
+    new DatabaseAnalyser('mysql:host=localhost;dbname=web_heimkaup_is', 'root')
 );
 
 $factory->create()->generate();
 
 $factory = new SimpleFactory(
     new TogetherConfig(['output' => __DIR__ . '/model/together-' . time()]),
-    new DatabaseAnalyser('mysql:host=localhost;dbname=burza', 'root')
+    new DatabaseAnalyser('mysql:host=localhost;dbname=web_heimkaup_is', 'root')
 );
 
 $factory->create()->generate();
