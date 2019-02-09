@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Exception;
 
-final class InvalidAttachException extends \LogicException
+use LogicException;
+
+final class InvalidAttachException extends LogicException
 {
 
 }

@@ -1,87 +1,67 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
-use InvalidArgumentException;
 use Contributte\Nextras\Orm\Generator\Exception\InvalidAttachException;
+use InvalidArgumentException;
 
 class Table
 {
 
-    /** @var Database */
-    private $database;
+	/** @var Database */
+	private $database;
 
-    /** @var string */
-    private $name;
+	/** @var string */
+	private $name;
 
-    /** @var Column[] */
-    private $columns = [];
+	/** @var Column[] */
+	private $columns = [];
 
-    /**
-     * @param Database $database
-     */
-    public function attach(Database $database)
-    {
-        if ($this->database) {
-            throw new InvalidAttachException('Table is already attached to database.');
-        }
+	public function attach(Database $database): void
+	{
+		if ($this->database) {
+			throw new InvalidAttachException('Table is already attached to database.');
+		}
 
-        $this->database = $database;
-    }
+		$this->database = $database;
+	}
 
-    /**
-     * @return Database
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
+	public function getDatabase(): Database
+	{
+		return $this->database;
+	}
 
-    /**
-     * @return Column[]
-     */
-    public function getColumns()
-    {
-        return $this->columns;
-    }
+	/**
+	 * @return Column[]
+	 */
+	public function getColumns(): array
+	{
+		return $this->columns;
+	}
 
-    /**
-     * @param string $name
-     * @return Column
-     */
-    public function getColumn($name)
-    {
-        if (!isset($this->columns[$name])) {
-            throw new InvalidArgumentException("Uknown column $name");
-        }
+	public function getColumn(string $name): Column
+	{
+		if (!isset($this->columns[$name])) {
+			throw new InvalidArgumentException('Uknown column ' . $name);
+		}
 
-        return $this->columns[$name];
-    }
+		return $this->columns[$name];
+	}
 
-    /**
-     * @param Column $column
-     */
-    public function addColumn(Column $column)
-    {
-        $column->attach($this);
-        $this->columns[$column->getName()] = $column;
-    }
+	public function addColumn(Column $column): void
+	{
+		$column->attach($this);
+		$this->columns[$column->getName()] = $column;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	public function getName(): string
+	{
+		return $this->name;
+	}
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
+	public function setName(string $name): void
+	{
+		$this->name = $name;
+	}
 
 }

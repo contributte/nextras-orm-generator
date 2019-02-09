@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
@@ -7,184 +7,139 @@ use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
 class PhpDoc
 {
 
-    /** @var string */
-    private $annotation;
+	/** @var string */
+	private $annotation;
 
-    /** @var string */
-    private $type;
+	/** @var string */
+	private $type;
 
-    /** @var string */
-    private $variable;
+	/** @var string */
+	private $variable;
 
-    /** @var string */
-    private $enum;
+	/** @var string */
+	private $enum;
 
-    /** @var string */
-    private $default;
+	/** @var string */
+	private $default;
 
-    /** @var bool */
-    private $virtual;
+	/** @var bool */
+	private $virtual;
 
-    /** @var PhpRelDoc */
-    private $relation;
+	/** @var PhpRelDoc */
+	private $relation;
 
-    /**
-     * @return string
-     */
-    public function getAnnotation()
-    {
-        return $this->annotation;
-    }
+	public function getAnnotation(): string
+	{
+		return $this->annotation;
+	}
 
-    /**
-     * @param string $annotation
-     */
-    public function setAnnotation($annotation)
-    {
-        $this->annotation = $annotation;
-    }
+	public function setAnnotation(string $annotation): void
+	{
+		$this->annotation = $annotation;
+	}
 
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+	public function getType(): string
+	{
+		return $this->type;
+	}
 
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
+	public function setType(string $type): void
+	{
+		$this->type = $type;
+	}
 
-    /**
-     * @return string
-     */
-    public function getVariable()
-    {
-        return $this->variable;
-    }
+	public function getVariable(): string
+	{
+		return $this->variable;
+	}
 
-    /**
-     * @param string $variable
-     */
-    public function setVariable($variable)
-    {
-        $this->variable = $variable;
-    }
+	public function setVariable(string $variable): void
+	{
+		$this->variable = $variable;
+	}
 
-    /**
-     * @return string
-     */
-    public function getEnum()
-    {
-        return $this->enum;
-    }
+	public function getEnum(): string
+	{
+		return $this->enum;
+	}
 
-    /**
-     * @param string $enum
-     */
-    public function setEnum($enum)
-    {
-        $this->enum = $enum;
-    }
+	public function setEnum(string $enum): void
+	{
+		$this->enum = $enum;
+	}
 
-    /**
-     * @return string
-     */
-    public function getDefault()
-    {
-        return $this->default;
-    }
+	public function getDefault(): string
+	{
+		return $this->default;
+	}
 
-    /**
-     * @param string $default
-     */
-    public function setDefault($default)
-    {
-        $this->default = $default;
-    }
+	public function setDefault(string $default): void
+	{
+		$this->default = $default;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isVirtual()
-    {
-        return $this->virtual;
-    }
+	public function isVirtual(): bool
+	{
+		return $this->virtual;
+	}
 
-    /**
-     * @param boolean $virtual
-     */
-    public function setVirtual($virtual)
-    {
-        $this->virtual = (bool)$virtual;
-    }
+	public function setVirtual(bool $virtual): void
+	{
+		$this->virtual = (bool) $virtual;
+	}
 
-    /**
-     * @return PhpRelDoc
-     */
-    public function getRelation()
-    {
-        return $this->relation;
-    }
+	public function getRelation(): PhpRelDoc
+	{
+		return $this->relation;
+	}
 
-    /**
-     * @param PhpRelDoc $relation
-     */
-    public function setRelation($relation)
-    {
-        $this->relation = $relation;
-    }
+	public function setRelation(PhpRelDoc $relation): void
+	{
+		$this->relation = $relation;
+	}
 
-    /**
-     * @return string
-     */
-    function __toString()
-    {
-        $b = new DocBuilder();
+	public function __toString(): string
+	{
+		$b = new DocBuilder();
 
-        // Anotation (@..)
-        if ($this->annotation) {
-            $b->append($this->annotation);
-        } else {
-            if ($this->virtual) {
-                $b->append('@property-read');
-            } else {
-                $b->append('@property');
-            }
-        }
+		// Anotation (@..)
+		if ($this->annotation) {
+			$b->append($this->annotation);
+		} else {
+			if ($this->virtual) {
+				$b->append('@property-read');
+			} else {
+				$b->append('@property');
+			}
+		}
 
-        // Type (int, string..)
-        $b->append($this->type);
+		// Type (int, string..)
+		$b->append($this->type);
 
-        // Variable ($..)
-        $b->append(sprintf('$%s', $this->variable));
+		// Variable ($..)
+		$b->append(sprintf('$%s', $this->variable));
 
-        // Default
-        if ($this->default) {
-            $b->append(sprintf('{default %s}', $this->default));
-        }
+		// Default
+		if ($this->default) {
+			$b->append(sprintf('{default %s}', $this->default));
+		}
 
-        // Enum {enum ..}
-        if ($this->enum) {
-            $b->append(sprintf('{enum self::%s_*}', $this->enum));
-        }
+		// Enum {enum ..}
+		if ($this->enum) {
+			$b->append(sprintf('{enum self::%s_*}', $this->enum));
+		}
 
-        // Virtual
-        if ($this->virtual) {
-            $b->append('{virtual}');
-        }
+		// Virtual
+		if ($this->virtual) {
+			$b->append('{virtual}');
+		}
 
-        // Relation
-        if ($this->relation) {
-            $b->append(sprintf('{%s}', (string)$this->relation));
-        }
+		// Relation
+		if ($this->relation) {
+			$b->append(sprintf('{%s}', (string) $this->relation));
+		}
 
-        return (string)$b;
-    }
+		return (string) $b;
+	}
 
 }

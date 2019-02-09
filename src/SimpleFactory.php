@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator;
 
@@ -15,43 +15,36 @@ use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleTogetherResolver;
 final class SimpleFactory
 {
 
-    /** @var Config */
-    private $config;
+	/** @var Config */
+	private $config;
 
-    /** @var IAnalyser */
-    private $analyser;
+	/** @var IAnalyser */
+	private $analyser;
 
-    /**
-     * @param Config $config
-     * @param IAnalyser $analyser
-     */
-    public function __construct(Config $config, IAnalyser $analyser)
-    {
-        $this->config = $config;
-        $this->analyser = $analyser;
-    }
+	public function __construct(Config $config, IAnalyser $analyser)
+	{
+		$this->config = $config;
+		$this->analyser = $analyser;
+	}
 
-    /**
-     * @return Generator
-     */
-    public function create()
-    {
-        $normgen = new Generator($this->config, $this->analyser);
+	public function create(): Generator
+	{
+		$normgen = new Generator($this->config, $this->analyser);
 
-        if ($this->config->get('generator.generate.strategy') === Config::STRATEGY_TOGETHER) {
-            $resolver = new SimpleTogetherResolver($this->config);
-        } else if ($this->config->get('generator.generate.strategy') === Config::STRATEGY_SEPARATE) {
-            $resolver = new SimpleSeparateResolver($this->config);
-        } else {
-            throw new InvalidStrategyException();
-        }
+		if ($this->config->get('generator.generate.strategy') === Config::STRATEGY_TOGETHER) {
+			$resolver = new SimpleTogetherResolver($this->config);
+		} elseif ($this->config->get('generator.generate.strategy') === Config::STRATEGY_SEPARATE) {
+			$resolver = new SimpleSeparateResolver($this->config);
+		} else {
+			throw new InvalidStrategyException();
+		}
 
-        $normgen->setEntityGenerator(new EntityGenerator($this->config, $resolver));
-        $normgen->setRepositoryGenerator(new RepositoryGenerator($this->config, $resolver, $resolver));
-        $normgen->setMapperGenerator(new MapperGenerator($this->config, $resolver));
-        $normgen->setFacadeGenerator(new FacadeGenerator($this->config, $resolver));
+		$normgen->setEntityGenerator(new EntityGenerator($this->config, $resolver));
+		$normgen->setRepositoryGenerator(new RepositoryGenerator($this->config, $resolver, $resolver));
+		$normgen->setMapperGenerator(new MapperGenerator($this->config, $resolver));
+		$normgen->setFacadeGenerator(new FacadeGenerator($this->config, $resolver));
 
-        return $normgen;
-    }
+		return $normgen;
+	}
 
 }

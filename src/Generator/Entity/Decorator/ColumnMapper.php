@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator;
 
@@ -11,43 +11,34 @@ use Nette\Utils\Strings;
 class ColumnMapper implements IDecorator
 {
 
-    /**
-     * @param PhpNamespace $namespace
-     * @param ClassType $class
-     * @param Column $column
-     * @return void
-     */
-    public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace)
-    {
+	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
+	{
+		switch ($column->getType()) {
 
-        switch ($column->getType()) {
+			// Map: DateTime
+			case ColumnTypes::TYPE_DATETIME:
+				$column->setType('DateTimeImmutable');
 
-            // Map: DateTime
-            case ColumnTypes::TYPE_DATETIME:
-                $column->setType('DateTimeImmutable');
+				if ($column->getDefault() !== null) {
+					$column->setDefault('now');
+				}
 
-                if ($column->getDefault() !== NULL) {
-                    $column->setDefault('now');
-                }
+				$namespace->addUse('Nextras\Dbal\Utils\DateTimeImmutable');
+				break;
 
-                $namespace->addUse('Nextras\Dbal\Utils\DateTimeImmutable');
-                break;
+			// Map: Enum
+			case ColumnTypes::TYPE_ENUM:
+				foreach ($column->getEnum() as $enum) {
+					$name = Strings::upper($column->getName()) . '_' . $enum;
+					$class->addConst($name, $enum);
+				}
 
-            // Map: Enum
-            case ColumnTypes::TYPE_ENUM:
+				if ($column->getDefault() !== null) {
+					$column->setDefault(Strings::upper($column->getName()) . '_' . $column->getDefault());
+				}
 
-                foreach ($column->getEnum() as $enum) {
-                    $name = Strings::upper($column->getName()) . '_' . $enum;
-                    $class->addConst($name, $enum);
-                }
-
-                if ($column->getDefault() !== NULL) {
-                    $column->setDefault(Strings::upper($column->getName()) . '_' . $column->getDefault());
-                }
-
-                break;
-        }
-
-    }
+				break;
+		}
+	}
 
 }

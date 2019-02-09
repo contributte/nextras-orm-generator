@@ -1,84 +1,60 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
 class ForeignKey
 {
 
-    /** @var string */
-    private $sourceTable;
+	/** @var string */
+	private $sourceTable;
 
-    /** @var string */
-    private $sourceColumn;
+	/** @var string */
+	private $sourceColumn;
 
-    /** @var string */
-    private $referenceTable;
+	/** @var string */
+	private $referenceTable;
 
-    /** @var string */
-    private $referenceColumn;
+	/** @var string */
+	private $referenceColumn;
 
-    /**
-     * @return string
-     */
-    public function getSourceTable()
-    {
-        return $this->sourceTable;
-    }
+	public function getSourceTable(): string
+	{
+		return $this->sourceTable;
+	}
 
-    /**
-     * @param string $sourceTable
-     */
-    public function setSourceTable($sourceTable)
-    {
-        $this->sourceTable = $sourceTable;
-    }
+	public function setSourceTable(string $sourceTable): void
+	{
+		$this->sourceTable = $sourceTable;
+	}
 
-    /**
-     * @return string
-     */
-    public function getSourceColumn()
-    {
-        return $this->sourceColumn;
-    }
+	public function getSourceColumn(): string
+	{
+		return $this->sourceColumn;
+	}
 
-    /**
-     * @param string $sourceColumn
-     */
-    public function setSourceColumn($sourceColumn)
-    {
-        $this->sourceColumn = $sourceColumn;
-    }
+	public function setSourceColumn(string $sourceColumn): void
+	{
+		$this->sourceColumn = $sourceColumn;
+	}
 
-    /**
-     * @return string
-     */
-    public function getReferenceTable()
-    {
-        return $this->referenceTable;
-    }
+	public function getReferenceTable(): string
+	{
+		return $this->referenceTable;
+	}
 
-    /**
-     * @param string $referenceTable
-     */
-    public function setReferenceTable($referenceTable)
-    {
-        $this->referenceTable = $referenceTable;
-    }
+	public function setReferenceTable(string $referenceTable): void
+	{
+		$this->referenceTable = $referenceTable;
+	}
 
-    /**
-     * @return string
-     */
-    public function getReferenceColumn()
-    {
-        return $this->referenceColumn;
-    }
+	public function getReferenceColumn(): string
+	{
+		return $this->referenceColumn;
+	}
 
-    /**
-     * @param string $referenceColumn
-     */
-    public function setReferenceColumn($referenceColumn)
-    {
-        $this->referenceColumn = $referenceColumn;
-    }
+	public function setReferenceColumn(string $referenceColumn): void
+	{
+		$this->referenceColumn = $referenceColumn;
+	}
 
 }

@@ -21,6 +21,7 @@ before_script:
 
 script:
     - vendor/bin/tester tests/unit -s -p php -c tests/php-unix.ini $NTESTER_FLAGS
+    - composer run-script qa
 
 after_script:
     # Coveralls

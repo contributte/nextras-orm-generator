@@ -1,79 +1,71 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Generator\Repository;
 
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Entity\Database;
 use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
+use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IRepositoryResolver;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\PhpNamespace;
-use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 
 class RepositoryGenerator extends AbstractGenerator
 {
 
-    /** @var IRepositoryResolver */
-    private $resolver;
-    
-    /** @var IEntityResolver */
-    private $entityResolver;
+	/** @var IRepositoryResolver */
+	private $resolver;
 
-    /**
-     * @param Config $config
-     * @param IRepositoryResolver $resolver
-     * @param IEntityResolver $entityResolver
-     */
-    function __construct(Config $config, IRepositoryResolver $resolver, IEntityResolver $entityResolver)
-    {
-        parent::__construct($config);
+	/** @var IEntityResolver */
+	private $entityResolver;
 
-        $this->resolver = $resolver;
-        $this->entityResolver = $entityResolver;
-    }
+	public function __construct(Config $config, IRepositoryResolver $resolver, IEntityResolver $entityResolver)
+	{
+		parent::__construct($config);
 
-    /**
-     * @param Database $database
-     */
-    public function generate(Database $database)
-    {
-        foreach ($database->getTables() as $table) {
-            // Create namespace and inner class
-            $namespace = new PhpNamespace($this->resolver->resolveRepositoryNamespace($table));
-            $class = $namespace->addClass($this->resolver->resolveRepositoryName($table));
+		$this->resolver = $resolver;
+		$this->entityResolver = $entityResolver;
+	}
 
-            // Detect extends class
-            if (($extends = $this->config->get('repository.extends')) !== NULL) {
-                $namespace->addUse($extends);
-                $class->setExtends($extends);
-            }
-            $namespace->addUse($this->entityResolver->resolveEntityNamespace($table) . '\\' . $this->entityResolver->resolveEntityName($table));
-            $entityName = $this->entityResolver->resolveEntityName($table);
-            $class->addMethod("getEntityClassNames")
-				->addComment("@return array")
+	public function generate(Database $database): void
+	{
+		foreach ($database->getTables() as $table) {
+			// Create namespace and inner class
+			$namespace = new PhpNamespace($this->resolver->resolveRepositoryNamespace($table));
+			$class = $namespace->addClass($this->resolver->resolveRepositoryName($table));
+
+			// Detect extends class
+			if (($extends = $this->config->get('repository.extends')) !== null) {
+				$namespace->addUse($extends);
+				$class->setExtends($extends);
+			}
+			$namespace->addUse($this->entityResolver->resolveEntityNamespace($table) . '\\' . $this->entityResolver->resolveEntityName($table));
+			$entityName = $this->entityResolver->resolveEntityName($table);
+			$class->addMethod('getEntityClassNames')
+				->addComment('@return array')
 				->setVisibility('public')
 				->setStatic(true)
-				->addBody("return [$entityName::class];");
-            
-            // Save file
-            $this->generateFile($this->resolver->resolveRepositoryFilename($table), (string)$namespace);
-        }
+				->addBody('return [' . $entityName . '::class];');
 
-        // Generate abstract base class
-        if ($this->config->get('repository.extends') !== NULL) {
-            // Create abstract class
-            $namespace = new PhpNamespace($this->config->get('repository.namespace'));
-            $class = $namespace->addClass(Helpers::extractShortName($this->config->get('repository.extends')));
-            $class->setAbstract(TRUE);
+			// Save file
+			$this->generateFile($this->resolver->resolveRepositoryFilename($table), (string) $namespace);
+		}
 
-            // Add extends from ORM/Repository
-            $extends = $this->config->get('nextras.orm.class.repository');
-            $namespace->addUse($extends);
-            $class->setExtends($extends);
+		// Generate abstract base class
+		if ($this->config->get('repository.extends') !== null) {
+			// Create abstract class
+			$namespace = new PhpNamespace($this->config->get('repository.namespace'));
+			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('repository.extends')));
+			$class->setAbstract(true);
 
-            // Save file
-            $this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('repository.extends')), $this->config->get('repository.folder')), (string)$namespace);
-        }
-    }
+			// Add extends from ORM/Repository
+			$extends = $this->config->get('nextras.orm.class.repository');
+			$namespace->addUse($extends);
+			$class->setExtends($extends);
+
+			// Save file
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('repository.extends')), $this->config->get('repository.folder')), (string) $namespace);
+		}
+	}
 
 }

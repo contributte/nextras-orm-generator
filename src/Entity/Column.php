@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
@@ -7,274 +7,215 @@ use Contributte\Nextras\Orm\Generator\Exception\InvalidAttachException;
 class Column
 {
 
-    /** @var Table */
-    private $table;
+	/** @var Table */
+	private $table;
 
-    /** @var string */
-    private $name;
+	/** @var string */
+	private $name;
 
-    /** @var mixed */
-    private $type;
+	/** @var mixed */
+	private $type;
 
-    /** @var mixed */
-    private $subtype;
+	/** @var mixed */
+	private $subtype;
 
-    /** @var bool */
-    private $nullable;
+	/** @var bool */
+	private $nullable;
 
-    /** @var mixed */
-    private $default;
+	/** @var mixed */
+	private $default;
 
-    /** @var array */
-    private $enum = [];
+	/** @var string[] */
+	private $enum = [];
 
-    /** @var bool */
-    private $onUpdate;
+	/** @var bool */
+	private $onUpdate;
 
-    /** @var PhpDoc */
-    private $phpDoc;
+	/** @var PhpDoc */
+	private $phpDoc;
 
-    /** @var bool */
-    private $primary;
+	/** @var bool */
+	private $primary;
 
-    /** @var bool */
-    private $unique;
+	/** @var bool */
+	private $unique;
 
-    /** @var bool */
-    private $index;
+	/** @var bool */
+	private $index;
 
-    /** @var ForeignKey */
-    private $foreignKey;
+	/** @var ForeignKey */
+	private $foreignKey;
 
-    /**
-     * @param Table $table
-     */
-    public function attach(Table $table)
-    {
-        if ($this->table) {
-            throw new InvalidAttachException('Column is already attached to table.');
-        }
+	public function attach(Table $table): void
+	{
+		if ($this->table) {
+			throw new InvalidAttachException('Column is already attached to table.');
+		}
 
-        $this->table = $table;
-    }
+		$this->table = $table;
+	}
 
-    /**
-     * @return Table
-     */
-    public function getTable()
-    {
-        return $this->table;
-    }
+	public function getTable(): Table
+	{
+		return $this->table;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	public function getName(): string
+	{
+		return $this->name;
+	}
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+	public function setName(string $name): void
+	{
+		$this->name = $name;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getType()
+	{
+		return $this->type;
+	}
 
-    /**
-     * @param mixed $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
+	/**
+	 * @param mixed $type
+	 */
+	public function setType($type): void
+	{
+		$this->type = $type;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getSubtype()
-    {
-        return $this->subtype;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getSubtype()
+	{
+		return $this->subtype;
+	}
 
-    /**
-     * @param mixed $subtype
-     */
-    public function setSubtype($subtype)
-    {
-        $this->subtype = $subtype;
-    }
+	/**
+	 * @param mixed $subtype
+	 */
+	public function setSubtype($subtype): void
+	{
+		$this->subtype = $subtype;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isNullable()
-    {
-        return $this->nullable;
-    }
+	public function isNullable(): bool
+	{
+		return $this->nullable;
+	}
 
-    /**
-     * @param boolean $nullable
-     */
-    public function setNullable($nullable)
-    {
-        $this->nullable = $nullable;
-    }
+	public function setNullable(bool $nullable): void
+	{
+		$this->nullable = $nullable;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getDefault()
-    {
-        return $this->default;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getDefault()
+	{
+		return $this->default;
+	}
 
-    /**
-     * @param mixed $default
-     */
-    public function setDefault($default)
-    {
-        $this->default = $default;
-    }
+	/**
+	 * @param mixed $default
+	 */
+	public function setDefault($default): void
+	{
+		$this->default = $default;
+	}
 
-    /**
-     * @return array
-     */
-    public function getEnum()
-    {
-        return $this->enum;
-    }
+	/**
+	 * @return string[]
+	 */
+	public function getEnum(): array
+	{
+		return $this->enum;
+	}
 
-    /**
-     * @param array $enum
-     */
-    public function setEnum(array $enum)
-    {
-        $this->enum = $enum;
-    }
+	/**
+	 * @param string[] $enum
+	 */
+	public function setEnum(array $enum): void
+	{
+		$this->enum = $enum;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isOnUpdate()
-    {
-        return $this->onUpdate;
-    }
+	public function isOnUpdate(): bool
+	{
+		return $this->onUpdate;
+	}
 
-    /**
-     * @param boolean $onUpdate
-     */
-    public function setOnUpdate($onUpdate)
-    {
-        $this->onUpdate = $onUpdate;
-    }
+	public function setOnUpdate(bool $onUpdate): void
+	{
+		$this->onUpdate = $onUpdate;
+	}
 
-    /**
-     * @return PhpDoc
-     */
-    public function getPhpDoc()
-    {
-        if (!$this->phpDoc) {
-            $this->phpDoc = new PhpDoc();
-        }
+	public function getPhpDoc(): PhpDoc
+	{
+		if (!$this->phpDoc) {
+			$this->phpDoc = new PhpDoc();
+		}
 
-        return $this->phpDoc;
-    }
+		return $this->phpDoc;
+	}
 
-    /**
-     * @param PhpDoc $phpDoc
-     */
-    public function setPhpDoc($phpDoc)
-    {
-        $this->phpDoc = $phpDoc;
-    }
+	public function setPhpDoc(PhpDoc $phpDoc): void
+	{
+		$this->phpDoc = $phpDoc;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isPrimary()
-    {
-        return $this->primary;
-    }
+	public function isPrimary(): bool
+	{
+		return $this->primary ?? false;
+	}
 
-    /**
-     * @param boolean $primary
-     */
-    public function setPrimary($primary)
-    {
-        $this->primary = $primary;
-    }
+	public function setPrimary(bool $primary): void
+	{
+		$this->primary = $primary;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isUnique()
-    {
-        return $this->unique;
-    }
+	public function isUnique(): bool
+	{
+		return $this->unique;
+	}
 
-    /**
-     * @param boolean $unique
-     */
-    public function setUnique($unique)
-    {
-        $this->unique = $unique;
-    }
+	public function setUnique(bool $unique): void
+	{
+		$this->unique = $unique;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isIndex()
-    {
-        return $this->index;
-    }
+	public function isIndex(): bool
+	{
+		return $this->index;
+	}
 
-    /**
-     * @param boolean $index
-     */
-    public function setIndex($index)
-    {
-        $this->index = $index;
-    }
+	public function setIndex(bool $index): void
+	{
+		$this->index = $index;
+	}
 
-    /**
-     * @return ForeignKey
-     */
-    public function getForeignKey()
-    {
-        return $this->foreignKey;
-    }
+	public function getForeignKey(): ?ForeignKey
+	{
+		return $this->foreignKey;
+	}
 
-    /**
-     * @param string $sourceColumn
-     * @param string $referenceTable
-     * @param string $referenceColumn
-     */
-    public function createForeignKey($sourceColumn, $referenceTable, $referenceColumn)
-    {
-        $key = new ForeignKey();
-        $key->setSourceColumn($sourceColumn);
-        $key->setReferenceTable($referenceTable);
-        $key->setReferenceColumn($referenceColumn);
+	public function createForeignKey(string $sourceColumn, string $referenceTable, string $referenceColumn): void
+	{
+		$key = new ForeignKey();
+		$key->setSourceColumn($sourceColumn);
+		$key->setReferenceTable($referenceTable);
+		$key->setReferenceColumn($referenceColumn);
 
-        $this->foreignKey = $key;
-    }
+		$this->foreignKey = $key;
+	}
 
-    /**
-     * @param ForeignKey $foreignKey
-     */
-    public function setForeignKey($foreignKey)
-    {
-        $this->foreignKey = $foreignKey;
-    }
+	public function setForeignKey(ForeignKey $foreignKey): void
+	{
+		$this->foreignKey = $foreignKey;
+	}
 
 }
