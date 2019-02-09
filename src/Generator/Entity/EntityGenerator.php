@@ -70,7 +70,7 @@ class EntityGenerator extends AbstractGenerator
 			// Create abstract class
 			$namespace = new PhpNamespace($this->config->get('entity.namespace'));
 			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('entity.extends')));
-			$class->setAbstract(true);
+			$class->setAbstract();
 
 			// Add extends from ORM/Entity
 			$extends = $this->config->get('nextras.orm.class.entity');
