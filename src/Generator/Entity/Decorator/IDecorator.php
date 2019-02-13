@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator;
 
@@ -9,11 +9,6 @@ use Nette\PhpGenerator\PhpNamespace;
 interface IDecorator
 {
 
-    /**
-     * @param Column $column
-     * @param ClassType $class
-     * @param PhpNamespace $namespace
-     * @return void
-     */
-    function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace);
+	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void;
+
 }

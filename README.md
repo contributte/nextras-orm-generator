@@ -4,7 +4,7 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 
 -----
 
-[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-generator.svg?style=flat-square)](https://travis-ci.org/travis/contributte/nextras-orm-generator)
+[![Build Status](https://img.shields.io/contributte/nextras-orm-generator.svg?style=flat-square)](https://travis-ci.org/travis/contributte/nextras-orm-generator)
 [![Code coverage](https://img.shields.io/coveralls/minetro/normgen.svg?style=flat-square)](https://coveralls.io/r/minetro/normgen)
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
@@ -12,7 +12,7 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 ## Install
 
 ```sh
-composer require contributte/nextras-orm-generator
+composer require --dev contributte/nextras-orm-generator
 ```
 
 ## ORM

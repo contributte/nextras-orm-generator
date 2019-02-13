@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Resolver;
 
@@ -7,21 +7,10 @@ use Contributte\Nextras\Orm\Generator\Entity\Table;
 interface IMapperResolver extends IFilenameResolver
 {
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveMapperFilename(Table $table);
+	public function resolveMapperFilename(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveMapperNamespace(Table $table);
+	public function resolveMapperNamespace(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveMapperName(Table $table);
+	public function resolveMapperName(Table $table): string;
+
 }

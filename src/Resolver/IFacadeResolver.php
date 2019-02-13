@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Resolver;
 
@@ -7,21 +7,10 @@ use Contributte\Nextras\Orm\Generator\Entity\Table;
 interface IFacadeResolver extends IFilenameResolver
 {
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveFacadeName(Table $table);
+	public function resolveFacadeName(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveFacadeNamespace(Table $table);
+	public function resolveFacadeNamespace(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveFacadeFilename(Table $table);
+	public function resolveFacadeFilename(Table $table): string;
+
 }

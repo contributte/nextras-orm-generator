@@ -1,169 +1,134 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
 use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
+use InvalidArgumentException;
 
 class PhpRelDoc
 {
 
-    /** Order directions */
-    const ASC = 1;
-    const DESC = 2;
+	/**
+	 * Order directions
+	 */
 
-    /** @var string */
-    private $type;
+	public const ASC = 1;
+	public const DESC = 2;
 
-    /** @var string */
-    private $entity;
+	/** @var string */
+	private $type;
 
-    /** @var string */
-    private $variable;
+	/** @var string */
+	private $entity;
 
-    /** @var bool */
-    private $primary;
+	/** @var string */
+	private $variable;
 
-    /** @var string */
-    private $orderProperty;
+	/** @var bool */
+	private $primary;
 
-    /** @var int */
-    private $orderDirection;
+	/** @var string */
+	private $orderProperty;
 
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+	/** @var int */
+	private $orderDirection;
 
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
+	public function getType(): string
+	{
+		return $this->type;
+	}
 
-    /**
-     * @return string
-     */
-    public function getEntity()
-    {
-        return $this->entity;
-    }
+	public function setType(string $type): void
+	{
+		$this->type = $type;
+	}
 
-    /**
-     * @param string $entity
-     */
-    public function setEntity($entity)
-    {
-        $this->entity = $entity;
-    }
+	public function getEntity(): string
+	{
+		return $this->entity;
+	}
 
-    /**
-     * @return string
-     */
-    public function getVariable()
-    {
-        return $this->variable;
-    }
+	public function setEntity(string $entity): void
+	{
+		$this->entity = $entity;
+	}
 
-    /**
-     * @param string $variable
-     */
-    public function setVariable($variable)
-    {
-        $this->variable = $variable;
-    }
+	public function getVariable(): string
+	{
+		return $this->variable;
+	}
 
-    /**
-     * @return boolean
-     */
-    public function isPrimary()
-    {
-        return $this->primary;
-    }
+	public function setVariable(string $variable): void
+	{
+		$this->variable = $variable;
+	}
 
-    /**
-     * @param boolean $primary
-     */
-    public function setPrimary($primary)
-    {
-        $this->primary = (bool)$primary;
-    }
+	public function isPrimary(): bool
+	{
+		return $this->primary;
+	}
 
-    /**
-     * @return string
-     */
-    public function getOrderProperty()
-    {
-        return $this->orderProperty;
-    }
+	public function setPrimary(bool $primary): void
+	{
+		$this->primary = (bool) $primary;
+	}
 
-    /**
-     * @param string $orderProperty
-     */
-    public function setOrderProperty($orderProperty)
-    {
-        $this->orderProperty = $orderProperty;
-    }
+	public function getOrderProperty(): string
+	{
+		return $this->orderProperty;
+	}
 
-    /**
-     * @return int
-     */
-    public function getOrderDirection()
-    {
-        return $this->orderDirection;
-    }
+	public function setOrderProperty(string $orderProperty): void
+	{
+		$this->orderProperty = $orderProperty;
+	}
 
-    /**
-     * @param int $direction
-     */
-    public function setOrderDirection($direction)
-    {
-        if (in_array($direction, [self::ASC, self::DESC])) {
-            throw new \InvalidArgumentException('Unknown order direction ' . $direction);
-        }
+	public function getOrderDirection(): int
+	{
+		return $this->orderDirection;
+	}
 
-        $this->orderDirection = $direction;
-    }
+	public function setOrderDirection(int $direction): void
+	{
+		if (in_array($direction, [self::ASC, self::DESC])) {
+			throw new InvalidArgumentException('Unknown order direction ' . $direction);
+		}
 
-    /**
-     * @return string
-     */
-    function __toString()
-    {
-        $b = new DocBuilder();
+		$this->orderDirection = $direction;
+	}
 
-        // Type (1:m, m:1, m:n, etc..)
-        $b->append($this->type);
+	public function __toString(): string
+	{
+		$b = new DocBuilder();
 
-        // Entity and variable (Entity::$variable)
-        if ($this->variable) {
-            $b->str(ucfirst($this->entity));
-            $b->str('::');
-            $b->append('$' . $this->variable);
-        } else {
-            $b->append(ucfirst($this->entity));
-        }
+		// Type (1:m, m:1, m:n, etc..)
+		$b->append($this->type);
 
-        // Primary
-        if ($this->primary) {
-            $b->append('primary');
-        }
+		// Entity and variable (Entity::$variable)
+		if ($this->variable) {
+			$b->str(ucfirst($this->entity));
+			$b->str('::');
+			$b->append('$' . $this->variable);
+		} else {
+			$b->append(ucfirst($this->entity));
+		}
 
-        // Order (order:*property*)
-        if ($this->orderProperty) {
-            $b->append('order:' . $this->orderProperty);
-        }
+		// Primary
+		if ($this->primary) {
+			$b->append('primary');
+		}
 
-        // Ordering (DESC/ASC)
-        if ($this->orderDirection) {
-            $b->append($this->orderDirection === self::ASC ? 'ASC' : 'DESC');
-        }
+		// Order (order:*property*)
+		if ($this->orderProperty) {
+			$b->append('order:' . $this->orderProperty);
+		}
 
-        return (string)$b;
-    }
+		// Ordering (DESC/ASC)
+		if ($this->orderDirection) {
+			$b->append($this->orderDirection === self::ASC ? 'ASC' : 'DESC');
+		}
+
+		return (string) $b;
+	}
 
 }

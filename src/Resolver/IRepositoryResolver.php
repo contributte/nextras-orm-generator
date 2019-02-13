@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Resolver;
 
@@ -7,22 +7,10 @@ use Contributte\Nextras\Orm\Generator\Entity\Table;
 interface IRepositoryResolver extends IFilenameResolver
 {
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveRepositoryName(Table $table);
+	public function resolveRepositoryName(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveRepositoryNamespace(Table $table);
+	public function resolveRepositoryNamespace(Table $table): string;
 
-    /**
-     * @param Table $table
-     * @return string
-     */
-    function resolveRepositoryFilename(Table $table);
+	public function resolveRepositoryFilename(Table $table): string;
 
 }

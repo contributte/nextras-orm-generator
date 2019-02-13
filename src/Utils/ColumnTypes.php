@@ -1,29 +1,29 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Utils;
 
 interface ColumnTypes
 {
 
-    // Natives
+	// Natives
 
-    const NATIVE_TYPE_ENUM = 'ENUM';
+	public const NATIVE_TYPE_ENUM = 'ENUM';
 
-    // Native regexs
+	// Native regexs
 
-    const NATIVE_REGEX_ENUM = '#\'(.*)\'#U';
+	public const NATIVE_REGEX_ENUM = '#\'(.*)\'#U';
 
-    // Others
+	// Others
 
-    const TYPE_TEXT = 'string';
-    const TYPE_INTEGER = 'int';
-    const TYPE_FLOAT = 'float';
-    const TYPE_BOOL = 'bool';
-    const TYPE_ENUM = 'enum';
-    const TYPE_DATE = 'date';
-    const TYPE_TIME = 'time';
-    const TYPE_DATETIME = 'datetime';
-    const TYPE_UNIX_TIMESTAMP = 'timestamp';
-    const TYPE_TIME_INTERVAL = 'timeint';
+	public const TYPE_TEXT = 'string';
+	public const TYPE_INTEGER = 'int';
+	public const TYPE_FLOAT = 'float';
+	public const TYPE_BOOL = 'bool';
+	public const TYPE_ENUM = 'enum';
+	public const TYPE_DATE = 'date';
+	public const TYPE_TIME = 'time';
+	public const TYPE_DATETIME = 'datetime';
+	public const TYPE_UNIX_TIMESTAMP = 'timestamp';
+	public const TYPE_TIME_INTERVAL = 'timeint';
 
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator;
 
@@ -16,116 +16,103 @@ use Nette\Utils\Strings;
 class ColumnDocumentor implements IDecorator
 {
 
-    /** @var IEntityResolver */
-    private $resolver;
+	/** @var IEntityResolver */
+	private $resolver;
 
-    /**
-     * @param IEntityResolver $resolver
-     */
-    public function __construct(IEntityResolver $resolver)
-    {
-        $this->resolver = $resolver;
-    }
+	public function __construct(IEntityResolver $resolver)
+	{
+		$this->resolver = $resolver;
+	}
 
-    /**
-     * @param PhpNamespace $namespace
-     * @param ClassType $class
-     * @param Column $column
-     * @return void
-     */
-    public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace)
-    {
-        $column->setPhpDoc($doc = new PhpDoc());
+	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
+	{
+		$column->setPhpDoc($doc = new PhpDoc());
 
-        // Annotation
-        $doc->setAnnotation('@property');
+		// Annotation
+		$doc->setAnnotation('@property');
 
-        // Type
-        if ($column->isNullable()) {
-            $doc->setType($this->getRealType($column) . '|NULL');
-        } else {
-            $doc->setType($this->getRealType($column));
-        }
+		// Type
+		if ($column->isNullable()) {
+			$doc->setType($this->getRealType($column) . '|NULL');
+		} else {
+			$doc->setType($this->getRealType($column));
+		}
 
-        // Variable
-        $doc->setVariable(Helpers::camelCase($column->getName()));
+		// Variable
+		$doc->setVariable(Helpers::camelCase($column->getName()));
 
-        // Defaults
-        if ($column->getDefault() !== NULL) {
-            $doc->setDefault($this->getRealDefault($column));
-        }
+		// Defaults
+		if ($column->getDefault() !== null) {
+			$doc->setDefault($this->getRealDefault($column));
+		}
 
-        // Enum
-        if (!empty($enum = $column->getEnum())) {
-            $doc->setEnum(Strings::upper($column->getName()));
-        }
+		// Enum
+		if (!empty($enum = $column->getEnum())) {
+			$doc->setEnum(Strings::upper($column->getName()));
+		}
 
-        // Relations
-        if (($key = $column->getForeignKey()) !== NULL) {
-            // Find foreign entity table
-            $ftable = $column->getTable()->getDatabase()->getForeignTable($key->getReferenceTable());
+		// Relations
+		if (($key = $column->getForeignKey()) !== null) {
+			// Find foreign entity table
+			$ftable = $column->getTable()->getDatabase()->getForeignTable($key->getReferenceTable());
 
-            // Update type to Entity name
-            $doc->setType($this->resolver->resolveEntityName($ftable));
-            $doc->setRelation($relDoc = new PhpRelDoc());
+			// Update type to Entity name
+			$doc->setType($this->resolver->resolveEntityName($ftable));
+			$doc->setRelation($relDoc = new PhpRelDoc());
 
-            if (($use = $this->getRealUse($ftable, $namespace))) {
-                $namespace->addUse($use);
-            }
+			if (($use = $this->getRealUse($ftable, $namespace))) {
+				$namespace->addUse($use);
+			}
 
-            $relDoc->setType('???');
-            $relDoc->setEntity($this->resolver->resolveEntityName($ftable));
-            $relDoc->setVariable('???');
-        }
+			$relDoc->setType('???');
+			$relDoc->setEntity($this->resolver->resolveEntityName($ftable));
+			$relDoc->setVariable('???');
+		}
 
-        // Append phpDoc to class
-        $class->addComment((string)$column->getPhpDoc());
-    }
+		// Append phpDoc to class
+		$class->addComment((string) $column->getPhpDoc());
+	}
 
-    /**
-     * @param Column $column
-     * @return mixed
-     */
-    protected function getRealType(Column $column)
-    {
-        switch ($column->getType()) {
-            case ColumnTypes::TYPE_ENUM:
-                return $column->getSubtype();
-            default:
-                return $column->getType();
-        }
-    }
+	/**
+	 * @return mixed
+	 */
+	protected function getRealType(Column $column)
+	{
+		switch ($column->getType()) {
+			case ColumnTypes::TYPE_ENUM:
+				return $column->getSubtype();
+			default:
+				return $column->getType();
+		}
+	}
 
-    /**
-     * @param Column $column
-     * @return mixed
-     */
-    protected function getRealDefault(Column $column)
-    {
-        switch ($column->getType()) {
-            case ColumnTypes::TYPE_ENUM:
-                return 'self::' . $column->getDefault();
-            default:
-                return $column->getDefault();
-        }
-    }
+	/**
+	 * @return mixed
+	 */
+	protected function getRealDefault(Column $column)
+	{
+		switch ($column->getType()) {
+			case ColumnTypes::TYPE_ENUM:
+				return 'self::' . $column->getDefault();
+			default:
+				return $column->getDefault();
+		}
+	}
 
-    /**
-     * @param Table $table
-     * @param PhpNamespace $namespace
-     * @return mixed
-     */
-    protected function getRealUse(Table $table, PhpNamespace $namespace)
-    {
-        $use = $namespace->unresolveName(
-            $this->resolver->resolveEntityNamespace($table) . Helpers::NS . $this->resolver->resolveEntityName($table)
-        );
+	/**
+	 * @return mixed
+	 */
+	protected function getRealUse(Table $table, PhpNamespace $namespace)
+	{
+		$use = $namespace->unresolveName(
+			$this->resolver->resolveEntityNamespace($table) . Helpers::NS . $this->resolver->resolveEntityName($table)
+		);
 
-        if (Strings::compare($use, $table->getName())) {
-            return NULL;
-        }
+		if (Strings::compare($use, $table->getName())) {
+			return null;
+		}
 
-        return $use;
-    }
+		return $use;
+	}
 
 }

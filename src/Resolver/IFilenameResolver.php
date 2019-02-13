@@ -1,17 +1,18 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Resolver;
 
 interface IFilenameResolver
 {
 
-    /** Constants */
-    const PHP_EXT = 'php';
+	/**
+	 * Constants
+	 */
+	public const PHP_EXT = 'php';
 
-    /**
-     * @param string $name
-     * @param string $folder [optional]
-     * @return string
-     */
-    function resolveFilename($name, $folder = NULL);
+	/**
+	 * @param string $folder [optional]
+	 */
+	public function resolveFilename(string $name, ?string $folder = null): string;
+
 }

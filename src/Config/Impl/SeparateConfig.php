@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Config\Impl;
 
@@ -7,54 +7,54 @@ use Contributte\Nextras\Orm\Generator\Config\Config;
 class SeparateConfig extends Config
 {
 
-    /** @var array */
-    protected $defaults = [
-        // Output folder
-        'output' => NULL,
-        // Generator
-        'generator.generate.strategy' => Config::STRATEGY_SEPARATE,
-        'generator.generate.entities' => TRUE,
-        'generator.generate.repositories' => TRUE,
-        'generator.generate.mappers' => TRUE,
-        'generator.generate.facades' => TRUE,
-        'generator.entity.exclude.primary' => TRUE,
-        // NextrasORM
-        'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
-        'nextras.orm.class.repository' => 'Nextras\Orm\Repository\Repository',
-        'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
-        // ORM
-        'orm.namespace' => NULL,
-		'orm.singularize' => FALSE,
-        // Entity
-        'entity.folder' => 'Entity',
-        'entity.namespace' => 'App\Model\Entity',
-        'entity.extends' => 'App\Model\Entity\AbstractEntity',
-        'entity.name.suffix' => NULL,
-		'entity.name.singularize' => FALSE,
-        'entity.filename.suffix' => NULL,
-		'entity.generate.column.constant' => FALSE,
+	/** @var mixed[] */
+	protected $defaults = [
+		// Output folder
+		'output' => null,
+		// Generator
+		'generator.generate.strategy' => Config::STRATEGY_SEPARATE,
+		'generator.generate.entities' => true,
+		'generator.generate.repositories' => true,
+		'generator.generate.mappers' => true,
+		'generator.generate.facades' => true,
+		'generator.entity.exclude.primary' => true,
+		// NextrasORM
+		'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
+		'nextras.orm.class.repository' => 'Nextras\Orm\Repository\Repository',
+		'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
+		// ORM
+		'orm.namespace' => null,
+		'orm.singularize' => false,
+		// Entity
+		'entity.folder' => 'Entity',
+		'entity.namespace' => 'App\Model\Entity',
+		'entity.extends' => 'App\Model\Entity\AbstractEntity',
+		'entity.name.suffix' => null,
+		'entity.name.singularize' => false,
+		'entity.filename.suffix' => null,
+		'entity.generate.column.constant' => false,
 		'entity.column.constants.prefix' => 'COL_',
-        // Repository
-        'repository.folder' => 'Repository',
-        'repository.namespace' => 'App\Model\Repository',
-        'repository.extends' => 'App\Model\Repository\AbstractRepository',
-        'repository.name.suffix' => 'Repository',
-		'repository.name.singularize' => FALSE,
-        'repository.filename.suffix' => 'Repository',
-        // Mapper
-        'mapper.folder' => 'Mapper',
-        'mapper.namespace' => 'App\Model\Mapper',
-        'mapper.extends' => 'App\Model\Mapper\AbstractMapper',
-        'mapper.name.suffix' => 'Mapper',
-		'mapper.name.singularize' => FALSE,
-        'mapper.filename.suffix' => 'Mapper',
-        // Facade
-        'facade.folder' => 'Facade',
-        'facade.namespace' => 'App\Model\Facade',
-        'facade.extends' => 'App\Model\Facade\AbstractFacade',
-        'facade.name.suffix' => 'Facade',
-		'facade.name.singularize' => FALSE,
-        'facade.filename.suffix' => 'Facade',
-    ];
+		// Repository
+		'repository.folder' => 'Repository',
+		'repository.namespace' => 'App\Model\Repository',
+		'repository.extends' => 'App\Model\Repository\AbstractRepository',
+		'repository.name.suffix' => 'Repository',
+		'repository.name.singularize' => false,
+		'repository.filename.suffix' => 'Repository',
+		// Mapper
+		'mapper.folder' => 'Mapper',
+		'mapper.namespace' => 'App\Model\Mapper',
+		'mapper.extends' => 'App\Model\Mapper\AbstractMapper',
+		'mapper.name.suffix' => 'Mapper',
+		'mapper.name.singularize' => false,
+		'mapper.filename.suffix' => 'Mapper',
+		// Facade
+		'facade.folder' => 'Facade',
+		'facade.namespace' => 'App\Model\Facade',
+		'facade.extends' => 'App\Model\Facade\AbstractFacade',
+		'facade.name.suffix' => 'Facade',
+		'facade.name.singularize' => false,
+		'facade.filename.suffix' => 'Facade',
+	];
 
 }

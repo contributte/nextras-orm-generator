@@ -1,161 +1,161 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Config;
 
+use ArrayAccess;
 use Nette\InvalidStateException;
 
-class Config implements \ArrayAccess
+class Config implements ArrayAccess
 {
 
-    /** Strategy types */
-    const STRATEGY_TOGETHER = 1;
-    const STRATEGY_SEPARATE = 2;
+	/**
+	 * Strategy types
+	 */
+	public const STRATEGY_TOGETHER = 1;
+	public const STRATEGY_SEPARATE = 2;
 
-    /** @var array */
-    protected $defaults = [
-        // Output folder
-        'output' => NULL,
-        // 1 => Entity + Repository + Mapper + Facade => same folder (folder = table name)
-        // 2 => Entities, Repositories, Mappers, Facades => same folder for each group (folder = group name)
-        'generator.generate.strategy' => NULL,
-        // Generator
-        'generator.generate.entities' => FALSE,
-        'generator.generate.repositories' => FALSE,
-        'generator.generate.mappers' => FALSE,
-        'generator.generate.facades' => FALSE,
-		'generator.generate.model' => FALSE,
-        'generator.entity.exclude.primary' => FALSE,
-        // NextrasORM
-        'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
-        'nextras.orm.class.repository' => 'Nextras\Orm\Repository\Repository',
-        'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
-        // ORM
-        'orm.namespace' => NULL,
-		'orm.singularize' => FALSE,
-        // Entity
-        'entity.folder' => NULL,
-        'entity.namespace' => NULL,
-        'entity.extends' => NULL,
-        'entity.name.suffix' => NULL,
-		'entity.name.singularize' => FALSE,
-        'entity.filename.suffix' => NULL,
-		'entity.generate.column.constant' => FALSE,
+	/** @var mixed[] */
+	protected $defaults = [
+		// Output folder
+		'output' => null,
+		// 1 => Entity + Repository + Mapper + Facade => same folder (folder = table name)
+		// 2 => Entities, Repositories, Mappers, Facades => same folder for each group (folder = group name)
+		'generator.generate.strategy' => null,
+		// Generator
+		'generator.generate.entities' => false,
+		'generator.generate.repositories' => false,
+		'generator.generate.mappers' => false,
+		'generator.generate.facades' => false,
+		'generator.generate.model' => false,
+		'generator.entity.exclude.primary' => false,
+		// NextrasORM
+		'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
+		'nextras.orm.class.repository' => 'Nextras\Orm\Repository\Repository',
+		'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
+		// ORM
+		'orm.namespace' => null,
+		'orm.singularize' => false,
+		// Entity
+		'entity.folder' => null,
+		'entity.namespace' => null,
+		'entity.extends' => null,
+		'entity.name.suffix' => null,
+		'entity.name.singularize' => false,
+		'entity.filename.suffix' => null,
+		'entity.generate.column.constant' => false,
 		'entity.column.constants.prefix' => 'COL_',
-        // Repository
-        'repository.folder' => NULL,
-        'repository.namespace' => NULL,
-        'repository.extends' => NULL,
-        'repository.name.suffix' => NULL,
-		'repository.name.singularize' => FALSE,
-        'repository.filename.suffix' => NULL,
-        // Mapper
-        'mapper.folder' => NULL,
-        'mapper.namespace' => NULL,
-        'mapper.extends' => NULL,
-        'mapper.name.suffix' => NULL,
-		'mapper.name.singularize' => FALSE,
-        'mapper.filename.suffix' => NULL,
-        // Facade
-        'facade.folder' => NULL,
-        'facade.namespace' => NULL,
-        'facade.extends' => NULL,
-        'facade.name.suffix' => NULL,
-		'facade.name.singularize' => FALSE,
-        'facade.filename.suffix' => NULL,
+		// Repository
+		'repository.folder' => null,
+		'repository.namespace' => null,
+		'repository.extends' => null,
+		'repository.name.suffix' => null,
+		'repository.name.singularize' => false,
+		'repository.filename.suffix' => null,
+		// Mapper
+		'mapper.folder' => null,
+		'mapper.namespace' => null,
+		'mapper.extends' => null,
+		'mapper.name.suffix' => null,
+		'mapper.name.singularize' => false,
+		'mapper.filename.suffix' => null,
+		// Facade
+		'facade.folder' => null,
+		'facade.namespace' => null,
+		'facade.extends' => null,
+		'facade.name.suffix' => null,
+		'facade.name.singularize' => false,
+		'facade.filename.suffix' => null,
 
-		'nextras.orm.class.model' => 'Nextras\Orm\Model\Model'
-    ];
+		'nextras.orm.class.model' => 'Nextras\Orm\Model\Model',
+	];
 
-    /** @var array */
-    protected $config = [];
+	/** @var mixed[] */
+	protected $config = [];
 
-    /**
-     * @param array $configuration
-     */
-    public function __construct(array $configuration)
-    {
-        // Validate config
-        if ($extra = array_diff_key((array)$configuration, $this->defaults)) {
-            $extra = implode(", ", array_keys($extra));
-            throw new InvalidStateException("Unknown configuration option $extra.");
-        }
+	/**
+	 * @param mixed[] $configuration
+	 */
+	public function __construct(array $configuration)
+	{
+		// Validate config
+		if ($extra = array_diff_key((array) $configuration, $this->defaults)) {
+			$extra = implode(', ', array_keys($extra));
+			throw new InvalidStateException('Unknown configuration option ' . $extra . '.');
+		}
 
-        $this->config = array_merge($this->defaults, $configuration);
-    }
+		$this->config = array_merge($this->defaults, $configuration);
+	}
 
-    /**
-     * MAGIC METHODS ***********************************************************
-     */
+	/**
+	 * MAGIC METHODS ***********************************************************
+	 */
 
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    function __get($name)
-    {
-        return $this->offsetGet($name);
-    }
+	/**
+	 * @return mixed
+	 */
+	public function __get(string $name)
+	{
+		return $this->offsetGet($name);
+	}
 
-    /**
-     * @param string $name
-     * @param mixed $value
-     */
-    function __set($name, $value)
-    {
-        $this->offsetSet($name, $value);
-    }
+	/**
+	 * @param string|mixed $name
+	 * @param mixed $value
+	 */
+	public function __set($name, $value): void
+	{
+		$this->offsetSet($name, $value);
+	}
 
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public function get($name)
-    {
-        return $this->offsetGet($name);
-    }
+	/**
+	 * @return mixed
+	 */
+	public function get(string $name)
+	{
+		return $this->offsetGet($name);
+	}
 
-    /**
-     * ARRAY ACCESS ************************************************************
-     */
+	/**
+	 * ARRAY ACCESS ************************************************************
+	 */
 
-    /**
-     * @param mixed $offset
-     * @return bool
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->config);
-    }
+	/**
+	 * @param mixed $offset
+	 */
+	public function offsetExists($offset): bool
+	{
+		return array_key_exists($offset, $this->config);
+	}
 
-    /**
-     * @param mixed $offset
-     * @return mixed
-     * @throws InvalidStateException
-     */
-    public function offsetGet($offset)
-    {
-        if ($this->offsetExists($offset)) {
-            return $this->config[$offset];
-        }
+	/**
+	 * @param mixed $offset
+	 * @return mixed
+	 * @throws InvalidStateException
+	 */
+	public function offsetGet($offset)
+	{
+		if ($this->offsetExists($offset)) {
+			return $this->config[$offset];
+		}
 
-        throw new InvalidStateException('Undefined offset: ' . $offset);
-    }
+		throw new InvalidStateException('Undefined offset: ' . $offset);
+	}
 
-    /**
-     * @param mixed $offset
-     * @param mixed $value
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->config[$offset] = $value;
-    }
+	/**
+	 * @param string|mixed $offset
+	 * @param mixed $value
+	 */
+	public function offsetSet($offset, $value): void
+	{
+		$this->config[$offset] = $value;
+	}
 
-    /**
-     * @param int $offset
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->config[$offset]);
-    }
+	/**
+	 * @param mixed $offset
+	 */
+	public function offsetUnset($offset): void
+	{
+		unset($this->config[$offset]);
+	}
 
 }

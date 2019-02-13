@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Generator;
 
@@ -9,32 +9,22 @@ use Nette\Utils\FileSystem;
 abstract class AbstractGenerator implements IGenerator
 {
 
-    /** @var Config */
-    protected $config;
+	/** @var Config */
+	protected $config;
 
-    /**
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
+	public function __construct(Config $config)
+	{
+		$this->config = $config;
+	}
 
-    /**
-     * Generate file
-     *
-     * @param string $filename
-     * @param string $code
-     */
-    protected function generateFile($filename, $code)
-    {
-        FileSystem::write($this->config->get('output') . DIRECTORY_SEPARATOR . $filename, "<?php\n\n$code");
-    }
+	/**
+	 * Generate file
+	 */
+	protected function generateFile(string $filename, string $code): void
+	{
+		FileSystem::write($this->config->get('output') . DIRECTORY_SEPARATOR . $filename, '<?php\n\n' . $code);
+	}
 
-    /**
-     * @param Database $database
-     * @return void
-     */
-    abstract function generate(Database $database);
+	abstract public function generate(Database $database): void;
 
 }
