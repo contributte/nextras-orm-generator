@@ -104,6 +104,10 @@ class ColumnDocumentor implements IDecorator
 	 */
 	protected function getRealUse(Table $table, PhpNamespace $namespace)
 	{
+		if($namespace->getName() === $this->resolver->resolveEntityNamespace($table)) {
+			return null;
+		}
+
 		$use = $namespace->unresolveName(
 			$this->resolver->resolveEntityNamespace($table) . Helpers::NS . $this->resolver->resolveEntityName($table)
 		);
