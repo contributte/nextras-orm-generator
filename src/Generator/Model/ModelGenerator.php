@@ -44,7 +44,7 @@ class ModelGenerator extends AbstractGenerator
 			$doc = new PhpDoc();
 			$doc->setAnnotation('@property-read');
 			$doc->setType($this->repositoryResolver->resolveRepositoryName($table));
-			$doc->setVariable($this->entityResolver->resolveEntityName($table));
+			$doc->setVariable(lcfirst($this->entityResolver->resolveEntityName($table)));
 			$class->addComment((string) $doc);
 		}
 		$this->generateFile($this->modelResolver->resolveModelFilename(), (string) $namespace);
