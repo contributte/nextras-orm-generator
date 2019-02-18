@@ -30,7 +30,7 @@ class ColumnMapper implements IDecorator
 			case ColumnTypes::TYPE_ENUM:
 				foreach ($column->getEnum() as $enum) {
 					$name = Strings::upper($column->getName()) . '_' . $enum;
-					$class->addConst($name, $enum);
+					$class->addConstant($name, $enum);
 				}
 
 				if ($column->getDefault() !== null) {
