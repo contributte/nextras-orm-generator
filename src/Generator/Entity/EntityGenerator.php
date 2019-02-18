@@ -29,7 +29,7 @@ class EntityGenerator extends AbstractGenerator
 		$this->resolver = $resolver;
 
 		$this->decorators[] = new ColumnMapper();
-		$this->decorators[] = new ColumnDocumentor($resolver);
+		$this->decorators[] = new ColumnDocumentor($resolver, $config->get('entity.generate.relations'));
 		$this->decorators[] = new ColumnConstantGenerator($config);
 	}
 

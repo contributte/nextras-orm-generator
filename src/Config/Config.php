@@ -44,6 +44,7 @@ class Config implements ArrayAccess
 		'entity.name.singularize' => false,
 		'entity.filename.suffix' => null,
 		'entity.generate.column.constant' => false,
+		'entity.generate.relations' => false,
 		'entity.column.constants.prefix' => 'COL_',
 		// Repository
 		'repository.folder' => null,
