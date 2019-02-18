@@ -5,6 +5,7 @@ namespace Contributte\Nextras\Orm\Generator;
 use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Generator\IGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Model\ModelGenerator;
 
 class Generator
 {
@@ -26,6 +27,9 @@ class Generator
 
 	/** @var IGenerator */
 	private $facadeGenerator;
+
+	/** @var ModelGenerator */
+	private $modelGenerator;
 
 	public function __construct(Config $config, IAnalyser $analyser)
 	{
@@ -73,6 +77,16 @@ class Generator
 		$this->facadeGenerator = $generator;
 	}
 
+	public function getModelGenerator(): IGenerator
+	{
+		return $this->modelGenerator;
+	}
+
+	public function setModelGenerator(IGenerator $generator): void
+	{
+		$this->modelGenerator = $generator;
+	}
+
 	/**
 	 * Generate ORM
 	 */
@@ -91,6 +105,9 @@ class Generator
 		}
 		if ($this->config->get('generator.generate.facades')) {
 			$this->facadeGenerator->generate($database);
+		}
+		if ($this->config->get('generator.generate.model')) {
+			$this->modelGenerator->generate($database);
 		}
 	}
 

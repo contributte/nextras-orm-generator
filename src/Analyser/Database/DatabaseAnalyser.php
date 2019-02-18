@@ -70,11 +70,11 @@ class DatabaseAnalyser implements IAnalyser
 			$column->setNullable($col['nullable']);
 			$column->setType(Helpers::columnType($col['nativetype']));
 			$column->setDefault($col['default']);
-			$column->setOnUpdate(Strings::contains($col['vendor']['Extra'], 'on update'));
+			$column->setOnUpdate(Strings::contains($col['vendor']['extra'], 'on update'));
 
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {
-				$enum = Strings::matchAll($col['vendor']['Type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
+				$enum = Strings::matchAll($col['vendor']['type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
 				if ($enum) {
 					$column->setEnum($enum[1]);
 					$column->setType(ColumnTypes::TYPE_ENUM);

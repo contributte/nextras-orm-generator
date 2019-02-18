@@ -8,11 +8,12 @@ use Contributte\Nextras\Orm\Generator\Resolver\IEntityResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IFacadeResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IFilenameResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IMapperResolver;
+use Contributte\Nextras\Orm\Generator\Resolver\IModelResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IRepositoryResolver;
 use Contributte\Nextras\Orm\Generator\Utils\Helpers;
 use Doctrine\Common\Inflector\Inflector;
 
-abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, IMapperResolver, IFacadeResolver
+abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, IMapperResolver, IFacadeResolver, IModelResolver
 {
 
 	/** @var Config */
@@ -47,6 +48,21 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 				$name = Inflector::singularize($name);
 		}
 		return $name;
+	}
+
+	public function resolveModelName(): string
+	{
+		return $this->config->get('model.name');
+	}
+
+	public function resolveModelNamespace(): string
+	{
+		return $this->config->get('model.namespace');
+	}
+
+	public function resolveModelFilename(): string
+	{
+		return $this->config->get('model.filename');
 	}
 
 }

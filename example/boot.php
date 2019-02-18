@@ -19,7 +19,7 @@ $factory->create()->generate();
 
 $factory = new SimpleFactory(
     new TogetherConfig(['output' => __DIR__ . '/model/together-' . time()]),
-    new DatabaseAnalyser('mysql:host=127.0.0.1;;dbname=nextras_orm_generator', 'root')
+    new DatabaseAnalyser('mysql:host=127.0.0.1;dbname=nextras_orm_generator', 'root')
 );
 
 $factory->create()->generate();

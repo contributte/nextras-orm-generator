@@ -17,11 +17,13 @@ class SeparateConfig extends Config
 		'generator.generate.repositories' => true,
 		'generator.generate.mappers' => true,
 		'generator.generate.facades' => true,
+		'generator.generate.model' => true,
 		'generator.entity.exclude.primary' => true,
 		// NextrasORM
 		'nextras.orm.class.entity' => 'Nextras\Orm\Entity\Entity',
 		'nextras.orm.class.repository' => 'Nextras\Orm\Repository\Repository',
 		'nextras.orm.class.mapper' => 'Nextras\Orm\Mapper\Mapper',
+		'nextras.orm.class.model' => 'Nextras\Orm\Model\Model',
 		// ORM
 		'orm.namespace' => null,
 		'orm.singularize' => false,
@@ -55,6 +57,12 @@ class SeparateConfig extends Config
 		'facade.name.suffix' => 'Facade',
 		'facade.name.singularize' => false,
 		'facade.filename.suffix' => 'Facade',
+		// model
+		'model.folder' => null,
+		'model.namespace' => 'App\Model',
+		'model.name' => 'Orm',
+		'model.filename' => 'Orm.php',
+
 	];
 
 }
