@@ -4,7 +4,6 @@ namespace Contributte\Nextras\Orm\Generator\Generator;
 
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Entity\Database;
-use Nette\PhpGenerator\PhpFile;
 use Nette\Utils\FileSystem;
 
 abstract class AbstractGenerator implements IGenerator

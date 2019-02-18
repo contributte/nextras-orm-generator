@@ -8,6 +8,7 @@ use Contributte\Nextras\Orm\Generator\Exception\InvalidStrategyException;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\EntityGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Facade\FacadeGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Mapper\MapperGenerator;
+use Contributte\Nextras\Orm\Generator\Generator\Model\ModelGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Repository\RepositoryGenerator;
 use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleSeparateResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleTogetherResolver;
@@ -43,6 +44,7 @@ final class SimpleFactory
 		$normgen->setRepositoryGenerator(new RepositoryGenerator($this->config, $resolver, $resolver));
 		$normgen->setMapperGenerator(new MapperGenerator($this->config, $resolver));
 		$normgen->setFacadeGenerator(new FacadeGenerator($this->config, $resolver));
+		$normgen->setModelGenerator(new ModelGenerator($this->config, $resolver, $resolver, $resolver));
 
 		return $normgen;
 	}
