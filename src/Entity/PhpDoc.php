@@ -147,7 +147,7 @@ class PhpDoc
 			$b->append('{virtual}');
 		}
 
-		if ($this->primary) {
+		if ($this->primary && $this->variable === 'id') {
 			$b->append('{primary}');
 		}
 
