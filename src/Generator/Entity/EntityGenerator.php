@@ -4,6 +4,7 @@ namespace Contributte\Nextras\Orm\Generator\Generator\Entity;
 
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Entity\Database;
+use Contributte\Nextras\Orm\Generator\Entity\Table;
 use Contributte\Nextras\Orm\Generator\Generator\AbstractGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnConstantGenerator;
 use Contributte\Nextras\Orm\Generator\Generator\Entity\Decorator\ColumnDocumentor;

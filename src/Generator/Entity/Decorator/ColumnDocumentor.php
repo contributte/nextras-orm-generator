@@ -28,7 +28,7 @@ class ColumnDocumentor implements IDecorator
 		$this->generateRelations = $generateRelations;
 	}
 
-	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
+	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace, bool $isPrimary = false): void
 	{
 		$column->setPhpDoc($doc = new PhpDoc());
 
@@ -36,11 +36,7 @@ class ColumnDocumentor implements IDecorator
 		$doc->setAnnotation('@property');
 
 		// Type
-		if ($column->isNullable()) {
-			$doc->setType($this->getRealType($column) . '|NULL');
-		} else {
-			$doc->setType($this->getRealType($column));
-		}
+		$doc->setType($this->getRealType($column) . ($column->isNullable() ?: '|NULL'));
 
 		// Variable
 		$doc->setVariable(Helpers::camelCase($column->getName()));
@@ -72,6 +68,8 @@ class ColumnDocumentor implements IDecorator
 			$relDoc->setEntity($this->resolver->resolveEntityName($ftable));
 			$relDoc->setVariable('???');
 		}
+
+		$doc->setPrimary($isPrimary);
 
 		// Append phpDoc to class
 		$class->addComment((string) $column->getPhpDoc());
