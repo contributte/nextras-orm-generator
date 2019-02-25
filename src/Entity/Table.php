@@ -48,6 +48,20 @@ class Table
 		return $this->columns[$name];
 	}
 
+	/**
+	 * @return Column[]
+	 */
+	public function getPrimaryKeyColumns(): array
+	{
+		$primary = [];
+		foreach ($this->columns as $column) {
+			if ($column->isPrimary()) {
+				$primary[] = $column;
+			}
+		}
+		return $primary;
+	}
+
 	public function addColumn(Column $column): void
 	{
 		$column->attach($this);
