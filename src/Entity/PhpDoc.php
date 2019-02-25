@@ -158,4 +158,5 @@ class PhpDoc
 
 		return (string) $b;
 	}
+
 }

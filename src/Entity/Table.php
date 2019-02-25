@@ -48,6 +48,9 @@ class Table
 		return $this->columns[$name];
 	}
 
+	/**
+	 * @return Column[]
+	 */
 	public function getPrimaryKeyColumns(): array
 	{
 		$primary = [];
