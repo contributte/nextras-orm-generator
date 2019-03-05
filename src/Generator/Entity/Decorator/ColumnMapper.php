@@ -17,10 +17,12 @@ class ColumnMapper implements IDecorator
 
 			// Map: DateTime
 			case ColumnTypes::TYPE_DATETIME:
+			case ColumnTypes::TYPE_DATE:
 				$column->setType('DateTimeImmutable');
 
 				if ($column->getDefault() !== null) {
-					$column->setDefault('now');
+					$defaultValue = $column->getType() === ColumnTypes::TYPE_DATE ? 'today' : 'now';
+					$column->setDefault($defaultValue);
 				}
 
 				$namespace->addUse('Nextras\Dbal\Utils\DateTimeImmutable');
