@@ -25,6 +25,9 @@ class PhpDoc
 	/** @var bool */
 	private $virtual;
 
+	/** @var bool */
+	private $primary;
+
 	/** @var PhpRelDoc */
 	private $relation;
 
@@ -98,6 +101,16 @@ class PhpDoc
 		$this->relation = $relation;
 	}
 
+	public function isPrimary(): bool
+	{
+		return $this->primary;
+	}
+
+	public function setPrimary(bool $primary): void
+	{
+		$this->primary = $primary;
+	}
+
 	public function __toString(): string
 	{
 		$b = new DocBuilder();
@@ -132,6 +145,10 @@ class PhpDoc
 		// Virtual
 		if ($this->virtual) {
 			$b->append('{virtual}');
+		}
+
+		if ($this->primary && $this->variable === 'id') {
+			$b->append('{primary}');
 		}
 
 		// Relation
