@@ -42,6 +42,9 @@ $factory = new SimpleFactory(
 $factory->create()->generate();
 ```
 
+You can also see example in our playground:
+https://github.com/contributte/playground/tree/master/nextras-orm-generator
+
 ## Configuration
 This tool is highly configurable, take a look at configuration class for list of all available options:
 https://github.com/contributte/nextras-orm-generator/tree/master/src/Config
