@@ -9,13 +9,16 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
 
+## Discussion / Help
+
+[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
+
 ## Install
 
 ```sh
 composer require --dev contributte/nextras-orm-generator
 ```
-
-## ORM
+## About
 
 This little tool can generate:
 
@@ -23,12 +26,37 @@ This little tool can generate:
 * Repository
 * Mapper
 * Facade
+* Model
 
-## WARNING
+## Overview
 
-This handy tool is currently under massive active developing. So please be patient.
+- [Installation](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
+- [Usage - how to run](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
+- [Configuration - how to configure](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#configuration)
 
-## Usage
+## Maintainers
 
-See more in folder example.
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/f3l1x">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
+        </a>
+        </br>
+        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/dakorpar">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/9303856?s=150&v=4">
+        </a>
+        </br>
+        <a href="https://github.com/dakorpar">Dalibor Korpar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
+-----
+
+Thank you for testing, reporting and contributing.
