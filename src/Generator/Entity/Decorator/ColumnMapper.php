@@ -32,7 +32,7 @@ class ColumnMapper implements IDecorator
 			case ColumnTypes::TYPE_ENUM:
 				foreach ($column->getEnum() as $enum) {
 					// Replace all character which are not in Helpers::PHP_IDENT
-					$enum = Strings::replace ($enum, '/[^a-zA-Z0-9_\x7f-\xff]*/', '');
+					$enum = Strings::replace($enum, '/[^a-zA-Z0-9_\x7f-\xff]*/', '');
 					$enum = Strings::upper($enum);
 					$name = Strings::upper($column->getName()) . '_' . $enum;
 					$class->addConstant($name, $enum);
