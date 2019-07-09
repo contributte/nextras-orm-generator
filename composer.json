@@ -38,5 +38,10 @@
     "coverage": [
       "tester -s -p phpdbg --colors 1 -C --coverage ./coverage.xml --coverage-src ./src tests/unit"
     ]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.3.x-dev"
+    }
   }
 }
