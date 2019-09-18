@@ -13,7 +13,7 @@
   "require": {
     "php": ">=7.1",
     "nette/database": "^2.4.0",
-    "nette/php-generator": "^2.5|3.1",
+    "nette/php-generator": "^2.5|3.2.3",
     "nette/utils": "^2.4",
     "doctrine/inflector": "^1.0"
   },
