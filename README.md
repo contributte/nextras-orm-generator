@@ -15,10 +15,18 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 
 ## Install
 
-```sh
+```
 composer require --dev contributte/nextras-orm-generator
 ```
-## About
+
+## Versions
+
+| State       | Version | Branch   | PHP      |
+|-------------|---------|----------|----------|
+| dev         | `^0.4`  | `master` | `>= 7.2` |
+| stable      | `^0.3`  | `master` | `>= 7.1` |
+
+## Overview
 
 This little tool can generate:
 
@@ -27,8 +35,6 @@ This little tool can generate:
 * Mapper
 * Facade
 * Model
-
-## Overview
 
 - [Installation](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
 - [Usage - how to run](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
