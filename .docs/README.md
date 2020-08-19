@@ -31,7 +31,7 @@ $factory->create()->generate();
 2. Generate entities separately
 ```php
 $config = [
-    'output' => __DIR__ . '/model/together',
+    'output' => __DIR__ . '/model/separated',
     //other options
     ];
 $factory = new SimpleFactory(
