@@ -15,8 +15,8 @@ Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
 
 ## Install
 
-```
-$ composer require --dev contributte/nextras-orm-generator
+```bash
+composer require --dev contributte/nextras-orm-generator
 ```
 
 ## Versions

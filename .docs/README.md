@@ -7,7 +7,7 @@
 
 ## Installation
 Most common way to install this tool is with composer:
-```sh
+```bash
 composer require --dev contributte/nextras-orm-generator
 ```
 This script does not require to be part of your project so you can install it anywhere you like and just provide path to desired dir where entities will be generated.
