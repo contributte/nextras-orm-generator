@@ -17,9 +17,9 @@ This script does not require to be part of your project so you can install it an
 1) Generate all entities in same folder (together)
 ```php
 $config = [
-    'output' => __DIR__ . '/model/together',
-    //other options
-    ];
+	'output' => __DIR__ . '/model/together',
+	//other options
+	];
 $factory = new SimpleFactory(
 	new TogetherConfig($config),
 	new DatabaseAnalyser('mysql:host=127.0.0.1;dbname=nextras_orm_generator', 'root')
@@ -31,9 +31,9 @@ $factory->create()->generate();
 2. Generate entities separately
 ```php
 $config = [
-    'output' => __DIR__ . '/model/separated',
-    //other options
-    ];
+	'output' => __DIR__ . '/model/separated',
+	//other options
+	];
 $factory = new SimpleFactory(
 	new SeparateConfig($config),
 	new DatabaseAnalyser('mysql:host=127.0.0.1;dbname=nextras_orm_generator', 'root')
