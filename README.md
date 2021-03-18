@@ -1,23 +1,34 @@
-# Nextras ORM generator
+![](https://heatbadger.now.sh/github/readme/contributte/nextras-orm-generator/)
 
-Tool for generating entities for [Nextras\ORM](https://github.com/nextras/orm).
+<p align=center>
+  <a href="https://github.com/contributte/nextras-orm-generator/actions"><img src="https://badgen.net/github/checks/contributte/nextras-orm-generator/master"></a>
+  <a href="https://coveralls.io/r/contributte/nextras-orm-generator"><img src="https://badgen.net/coveralls/c/github/contributte/nextras-orm-generator"></a>
+  <a href="https://packagist.org/packages/contributte/nextras-orm-generator"><img src="https://badgen.net/packagist/dm/contributte/nextras-orm-generator"></a>
+  <a href="https://packagist.org/packages/contributte/nextras-orm-generator"><img src="https://badgen.net/packagist/v/contributte/nextras-orm-generator"></a>
+</p>
+<p align=center>
+  <a href="https://packagist.org/packages/contributte/nextras-orm-generator"><img src="https://badgen.net/packagist/php/contributte/nextras-orm-generator"></a>
+  <a href="https://github.com/contributte/nextras-orm-generator"><img src="https://badgen.net/github/license/contributte/nextras-orm-generator"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
------
+<p align=center>
+Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+</p>
 
-[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-generator.svg?style=flat-square)](https://travis-ci.org/contributte/nextras-orm-generator)
-[![Code coverage](https://img.shields.io/coveralls/minetro/normgen.svg?style=flat-square)](https://coveralls.io/r/minetro/normgen)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-generator.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-generator)
+## Usage
 
-## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
-
-## Install
+To install the latest version of `contributte/nextras-orm-generator` use [Composer](https://getcomposer.org).
 
 ```bash
-composer require --dev contributte/nextras-orm-generator
+composer require contributte/nextras-orm-generator
 ```
+
+## Documentation
+
+For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
@@ -26,43 +37,21 @@ composer require --dev contributte/nextras-orm-generator
 | dev         | `^0.4`  | `master` | `>= 7.2` |
 | stable      | `^0.3`  | `master` | `>= 7.1` |
 
-## Overview
+## Development
 
-This little tool can generate:
+See [how to contribute](https://contributte.org/contributing.html) to this package.
 
-* Entity
-* Repository
-* Mapper
-* Facade
-* Model
+This package is currently maintaining by these authors.
 
-- [Installation](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
-- [Usage - how to run](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#usage)
-- [Configuration - how to configure](https://github.com/contributte/nextras-orm-generator/blob/master/.docs/README.md#configuration)
+<a href="https://github.com/f3l1x">
+  <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
+</a>
 
-## Maintainers
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/f3l1x">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
-        </a>
-        </br>
-        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/dakorpar">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/9303856?s=150&v=4">
-        </a>
-        </br>
-        <a href="https://github.com/dakorpar">Dalibor Korpar</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<a href="https://github.com/dakorpar">
+  <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/9303856?v=3&s=80">
+</a>
 
 -----
 
-Thank you for testing, reporting and contributing.
+Consider to [support](https://contributte.org/partners.html) **contributte** development team.
+Also thank you for using this package.
