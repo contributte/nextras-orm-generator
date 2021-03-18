@@ -27,18 +27,6 @@
       "Contributte\\Nextras\\Orm\\Generator\\": "src/"
     }
   },
-  "scripts": {
-    "qa": [
-      "linter src tests",
-      "codesniffer src tests"
-    ],
-    "tests": [
-      "tester -s -p php --colors 1 -C tests/unit"
-    ],
-    "coverage": [
-      "tester -s -p phpdbg --colors 1 -C --coverage ./coverage.xml --coverage-src ./src tests/unit"
-    ]
-  },
   "extra": {
     "branch-alias": {
       "dev-master": "0.4.x-dev"
