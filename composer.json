@@ -2,7 +2,9 @@
   "name": "contributte/nextras-orm-generator",
   "description": "Nextras ORM Generator",
   "type": "library",
-  "license": ["MIT"],
+  "license": [
+    "MIT"
+  ],
   "homepage": "https://github.com/contributte/nextras-orm-generator",
   "authors": [
     {
