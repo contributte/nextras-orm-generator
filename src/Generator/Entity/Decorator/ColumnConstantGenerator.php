@@ -26,6 +26,7 @@ class ColumnConstantGenerator implements IDecorator
 		if (!$this->config->get('entity.generate.column.constant')) {
 			return;
 		}
+
 		$name = Strings::upper($this->config->get('entity.column.constants.prefix') . $column->getName());
 		$class->addConstant($name, Helpers::camelCase($column->getName()));
 	}

@@ -59,6 +59,7 @@ class Helpers
 				}
 			}
 		}
+
 		return $cache[$type];
 	}
 

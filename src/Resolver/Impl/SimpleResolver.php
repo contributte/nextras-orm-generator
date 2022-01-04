@@ -47,6 +47,7 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 		if ($singularize) {
 				$name = Inflector::singularize($name);
 		}
+
 		return $name;
 	}
 

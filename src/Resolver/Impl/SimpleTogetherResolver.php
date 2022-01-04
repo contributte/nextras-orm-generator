@@ -69,6 +69,7 @@ class SimpleTogetherResolver extends SimpleResolver
 		if ($this->config->get($type . '.name.singularize')) {
 			$name = Inflector::singularize($name);
 		}
+
 		$name .= $this->config->get($type . '.name.suffix');
 		return $this->normalize($name);
 	}
@@ -80,6 +81,7 @@ class SimpleTogetherResolver extends SimpleResolver
 		if ($this->config->get($type . '.name.singularize')) {
 			$name = Inflector::singularize($name);
 		}
+
 		$filename = $this->normalize($name . $this->config->get($type . '.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
 		return $folder . Helpers::DS . $filename;
 	}

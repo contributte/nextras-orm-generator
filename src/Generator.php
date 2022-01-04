@@ -97,15 +97,19 @@ class Generator
 		if ($this->config->get('generator.generate.entities')) {
 			$this->entityGenerator->generate($database);
 		}
+
 		if ($this->config->get('generator.generate.repositories')) {
 			$this->repositoryGenerator->generate($database);
 		}
+
 		if ($this->config->get('generator.generate.mappers')) {
 			$this->mapperGenerator->generate($database);
 		}
+
 		if ($this->config->get('generator.generate.facades')) {
 			$this->facadeGenerator->generate($database);
 		}
+
 		if ($this->config->get('generator.generate.model')) {
 			$this->modelGenerator->generate($database);
 		}

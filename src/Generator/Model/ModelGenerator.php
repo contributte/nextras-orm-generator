@@ -47,6 +47,7 @@ class ModelGenerator extends AbstractGenerator
 			$doc->setVariable(lcfirst($this->entityResolver->resolveEntityName($table)));
 			$class->addComment((string) $doc);
 		}
+
 		$this->generateFile($this->modelResolver->resolveModelFilename(), (string) $namespace);
 	}
 

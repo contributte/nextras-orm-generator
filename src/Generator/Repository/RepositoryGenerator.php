@@ -39,6 +39,7 @@ class RepositoryGenerator extends AbstractGenerator
 				$namespace->addUse($extends);
 				$class->setExtends($extends);
 			}
+
 			$namespace->addUse($this->entityResolver->resolveEntityNamespace($table) . '\\' . $this->entityResolver->resolveEntityName($table));
 			$entityName = $this->entityResolver->resolveEntityName($table);
 			$class->addMethod('getEntityClassNames')

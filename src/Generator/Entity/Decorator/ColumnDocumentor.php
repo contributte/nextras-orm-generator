@@ -47,7 +47,7 @@ class ColumnDocumentor implements IDecorator
 		}
 
 		// Enum
-		if (!empty($enum = $column->getEnum())) {
+		if (!empty($column->getEnum())) {
 			$doc->setEnum(Strings::upper($column->getName()));
 		}
 

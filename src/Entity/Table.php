@@ -59,6 +59,7 @@ class Table
 				$primary[] = $column;
 			}
 		}
+
 		return $primary;
 	}
 

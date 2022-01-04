@@ -51,7 +51,6 @@ class EntityGenerator extends AbstractGenerator
 
 			// Add table columns
 			foreach ($table->getColumns() as $column) {
-
 				if ($this->config->get('generator.entity.exclude.primary')) {
 					if ($column->isPrimary()) continue;
 				}

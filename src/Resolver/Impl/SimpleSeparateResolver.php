@@ -78,6 +78,7 @@ class SimpleSeparateResolver extends SimpleResolver
 		if ($this->config->get($type . '.name.singularize')) {
 			$name = Inflector::singularize($name);
 		}
+
 		$name .= $this->config->get($type . '.filename.suffix');
 		return $this->config->get($type . '.folder') . DIRECTORY_SEPARATOR . $name . '.' . IFilenameResolver::PHP_EXT;
 	}
@@ -88,8 +89,8 @@ class SimpleSeparateResolver extends SimpleResolver
 		if ($this->config->get($type . '.name.singularize')) {
 			$name = Inflector::singularize($name);
 		}
-		$name .= $this->config->get($type . '.name.suffix');
-		return $name;
+
+		return $name . $this->config->get($type . '.name.suffix');
 	}
 
 }

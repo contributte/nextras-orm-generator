@@ -70,11 +70,11 @@ class DatabaseAnalyser implements IAnalyser
 			$column->setNullable($col['nullable']);
 			$column->setType(Helpers::columnType($col['nativetype']));
 			$column->setDefault($col['default']);
-			$column->setOnUpdate(Strings::contains(isset($col['vendor']['extra']) ? $col['vendor']['extra'] : $col['vendor']['Extra'], 'on update'));
+			$column->setOnUpdate(Strings::contains($col['vendor']['extra'] ?? $col['vendor']['Extra'], 'on update'));
 
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {
-				$enum = Strings::matchAll(isset($col['vendor']['type']) ? $col['vendor']['type'] : $col['vendor']['Type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
+				$enum = Strings::matchAll($col['vendor']['type'] ?? $col['vendor']['Type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
 				if ($enum) {
 					$column->setEnum($enum[1]);
 					$column->setType(ColumnTypes::TYPE_ENUM);
@@ -95,7 +95,6 @@ class DatabaseAnalyser implements IAnalyser
 		$keys = $this->driver->getForeignKeys($tableName);
 
 		foreach ($indexes as $index) {
-
 			foreach ($index['columns'] as $col) {
 				$column = $table->getColumn($col);
 
@@ -103,7 +102,6 @@ class DatabaseAnalyser implements IAnalyser
 				$column->setUnique($index['unique']);
 				$column->setIndex(true);
 			}
-
 		}
 
 		foreach ($keys as $key) {
