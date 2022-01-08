@@ -6,8 +6,10 @@ install:
 qa: phpstan cs
 
 cs:
-	vendor/bin/linter src tests
 	vendor/bin/codesniffer src tests
+
+csf:
+	vendor/bin/codefixer src tests
 
 phpstan:
 	vendor/bin/phpstan analyse -l 8 -c phpstan.neon src
