@@ -4,11 +4,12 @@ namespace Contributte\Nextras\Orm\Generator\Entity;
 
 use Contributte\Nextras\Orm\Generator\Exception\InvalidAttachException;
 use InvalidArgumentException;
+use LogicException;
 
 class Table
 {
 
-	/** @var Database */
+	/** @var Database|null */
 	private $database;
 
 	/** @var string */
@@ -28,6 +29,10 @@ class Table
 
 	public function getDatabase(): Database
 	{
+		if (!$this->database) {
+			throw new LogicException('Database is needed');
+		}
+
 		return $this->database;
 	}
 

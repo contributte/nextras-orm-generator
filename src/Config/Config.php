@@ -85,7 +85,7 @@ class Config implements ArrayAccess
 	public function __construct(array $configuration)
 	{
 		// Validate config
-		if ($extra = array_diff_key((array) $configuration, $this->defaults)) {
+		if ($extra = array_diff_key($configuration, $this->defaults)) {
 			$extra = implode(', ', array_keys($extra));
 			throw new InvalidStateException('Unknown configuration option ' . $extra . '.');
 		}

@@ -25,7 +25,7 @@ class DatabaseAnalyser implements IAnalyser
 	public function __construct(string $dns, string $username, ?string $password = null)
 	{
 		$this->connection = new Connection($dns, $username, $password);
-		$this->driver = $this->connection->getSupplementalDriver();
+		$this->driver = $this->connection->getDriver();
 	}
 
 	public function getConnection(): Connection
@@ -75,10 +75,10 @@ class DatabaseAnalyser implements IAnalyser
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {
 				$enum = Strings::matchAll($col['vendor']['type'] ?? $col['vendor']['Type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
-				if ($enum) {
+				if ($enum !== []) {
 					$column->setEnum($enum[1]);
 					$column->setType(ColumnTypes::TYPE_ENUM);
-					$column->setSubType(Helpers::columnType($col['nativetype']));
+					$column->setSubtype(Helpers::columnType($col['nativetype']));
 				}
 			}
 

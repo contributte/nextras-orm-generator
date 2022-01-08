@@ -3,11 +3,12 @@
 namespace Contributte\Nextras\Orm\Generator\Entity;
 
 use Contributte\Nextras\Orm\Generator\Exception\InvalidAttachException;
+use LogicException;
 
 class Column
 {
 
-	/** @var Table */
+	/** @var Table|null */
 	private $table;
 
 	/** @var string */
@@ -31,10 +32,10 @@ class Column
 	/** @var bool */
 	private $onUpdate;
 
-	/** @var PhpDoc */
+	/** @var PhpDoc|null */
 	private $phpDoc;
 
-	/** @var bool */
+	/** @var bool|null */
 	private $primary;
 
 	/** @var bool */
@@ -57,6 +58,10 @@ class Column
 
 	public function getTable(): Table
 	{
+		if (!$this->table) {
+			throw new LogicException('Table is needed');
+		}
+
 		return $this->table;
 	}
 

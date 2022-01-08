@@ -28,7 +28,7 @@ class PhpDoc
 	/** @var bool */
 	private $primary;
 
-	/** @var PhpRelDoc */
+	/** @var PhpRelDoc|null */
 	private $relation;
 
 	public function getAnnotation(): string
@@ -91,7 +91,7 @@ class PhpDoc
 		$this->virtual = (bool) $virtual;
 	}
 
-	public function getRelation(): PhpRelDoc
+	public function getRelation(): ?PhpRelDoc
 	{
 		return $this->relation;
 	}

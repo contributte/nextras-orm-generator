@@ -41,8 +41,8 @@ class Helpers
 	public static function camelCase(string $s): string
 	{
 		$s = trim($s);
-		$s = preg_replace('#[^a-zA-Z0-9_-]#', ' ', $s);
-		$s = preg_replace('#[_-](?=[a-z])#', ' ', $s);
+		$s = (string) preg_replace('#[^a-zA-Z0-9_-]#', ' ', $s);
+		$s = (string) preg_replace('#[_-](?=[a-z])#', ' ', $s);
 		$s = substr(ucwords('x' . $s), 1);
 		$s = str_replace(' ', '', $s);
 		return $s;
@@ -54,7 +54,7 @@ class Helpers
 		if (!isset($cache[$type])) {
 			$cache[$type] = 'string';
 			foreach (self::$typePatterns as $s => $val) {
-				if (preg_match('#' . $s . '#i', $type)) {
+				if (preg_match('#' . $s . '#i', $type) !== false) {
 					return $cache[$type] = $val;
 				}
 			}
@@ -65,7 +65,7 @@ class Helpers
 
 	public static function stripMnDelimiters(string $s, ?string $r = null): string
 	{
-		return str_replace(self::$mnDelimiters, $r, $s);
+		return str_replace(self::$mnDelimiters, (string) $r, $s);
 	}
 
 }

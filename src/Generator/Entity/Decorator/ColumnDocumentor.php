@@ -110,7 +110,7 @@ class ColumnDocumentor implements IDecorator
 			return null;
 		}
 
-		$use = $namespace->unresolveName(
+		$use = $namespace->simplifyName(
 			$this->resolver->resolveEntityNamespace($table) . Helpers::NS . $this->resolver->resolveEntityName($table)
 		);
 

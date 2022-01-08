@@ -5,7 +5,6 @@ namespace Contributte\Nextras\Orm\Generator;
 use Contributte\Nextras\Orm\Generator\Analyser\IAnalyser;
 use Contributte\Nextras\Orm\Generator\Config\Config;
 use Contributte\Nextras\Orm\Generator\Generator\IGenerator;
-use Contributte\Nextras\Orm\Generator\Generator\Model\ModelGenerator;
 
 class Generator
 {
@@ -28,7 +27,7 @@ class Generator
 	/** @var IGenerator */
 	private $facadeGenerator;
 
-	/** @var ModelGenerator */
+	/** @var IGenerator */
 	private $modelGenerator;
 
 	public function __construct(Config $config, IAnalyser $analyser)

@@ -4,7 +4,7 @@ namespace Contributte\Nextras\Orm\Generator\Resolver\Impl;
 
 use Contributte\Nextras\Orm\Generator\Entity\Table;
 use Contributte\Nextras\Orm\Generator\Resolver\IFilenameResolver;
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 class SimpleSeparateResolver extends SimpleResolver
 {
@@ -75,8 +75,8 @@ class SimpleSeparateResolver extends SimpleResolver
 	protected function resolveFilenameFor(string $type, Table $table): string
 	{
 		$name = $this->normalize(ucfirst($table->getName()));
-		if ($this->config->get($type . '.name.singularize')) {
-			$name = Inflector::singularize($name);
+		if (!empty($this->config->get($type . '.name.singularize'))) {
+			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		$name .= $this->config->get($type . '.filename.suffix');
@@ -86,8 +86,8 @@ class SimpleSeparateResolver extends SimpleResolver
 	protected function resolveNameFor(string $type, Table $table): string
 	{
 		$name = $this->normalize(ucfirst($table->getName()));
-		if ($this->config->get($type . '.name.singularize')) {
-			$name = Inflector::singularize($name);
+		if (!empty($this->config->get($type . '.name.singularize'))) {
+			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		return $name . $this->config->get($type . '.name.suffix');

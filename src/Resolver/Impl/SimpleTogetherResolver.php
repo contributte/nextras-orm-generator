@@ -5,7 +5,7 @@ namespace Contributte\Nextras\Orm\Generator\Resolver\Impl;
 use Contributte\Nextras\Orm\Generator\Entity\Table;
 use Contributte\Nextras\Orm\Generator\Resolver\IFilenameResolver;
 use Contributte\Nextras\Orm\Generator\Utils\Helpers;
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 class SimpleTogetherResolver extends SimpleResolver
 {
@@ -66,8 +66,8 @@ class SimpleTogetherResolver extends SimpleResolver
 	protected function resolveName(string $type, Table $table): string
 	{
 		$name = ucfirst($table->getName());
-		if ($this->config->get($type . '.name.singularize')) {
-			$name = Inflector::singularize($name);
+		if (!empty($this->config->get($type . '.name.singularize'))) {
+			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		$name .= $this->config->get($type . '.name.suffix');
@@ -78,8 +78,8 @@ class SimpleTogetherResolver extends SimpleResolver
 	{
 		$folder = $this->table($table, $this->config->get('orm.singularize'));
 		$name = ucfirst($table->getName());
-		if ($this->config->get($type . '.name.singularize')) {
-			$name = Inflector::singularize($name);
+		if (!empty($this->config->get($type . '.name.singularize'))) {
+			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		$filename = $this->normalize($name . $this->config->get($type . '.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;

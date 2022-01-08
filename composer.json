@@ -20,8 +20,12 @@
     "doctrine/inflector": "^2.0.0"
   },
   "require-dev": {
-    "ninjify/qa": "^0.13",
-    "nette/tester": "^2.0",
+    "ninjify/nunjuck": "^0.4",
+    "ninjify/qa": "^0.12",
+    "phpstan/phpstan": "^1.0",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-nette": "^1.0",
+    "phpstan/phpstan-strict-rules": "^1.0",
     "tracy/tracy": "^2.3.0"
   },
   "autoload": {

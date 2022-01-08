@@ -11,7 +11,7 @@ use Contributte\Nextras\Orm\Generator\Resolver\IMapperResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IModelResolver;
 use Contributte\Nextras\Orm\Generator\Resolver\IRepositoryResolver;
 use Contributte\Nextras\Orm\Generator\Utils\Helpers;
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, IMapperResolver, IFacadeResolver, IModelResolver
 {
@@ -45,7 +45,7 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 		$name = $this->normalize(ucfirst($table->getName()));
 
 		if ($singularize) {
-				$name = Inflector::singularize($name);
+				$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		return $name;
