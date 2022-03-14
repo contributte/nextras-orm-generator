@@ -139,7 +139,7 @@ class Config implements ArrayAccess
 	 * @return mixed
 	 * @throws InvalidStateException
 	 */
-	public function offsetGet($offset)
+	public function offsetGet($offset): mixed
 	{
 		if ($this->offsetExists($offset)) {
 			return $this->config[$offset];
