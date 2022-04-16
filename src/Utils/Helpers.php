@@ -54,7 +54,7 @@ class Helpers
 		if (!isset($cache[$type])) {
 			$cache[$type] = 'string';
 			foreach (self::$typePatterns as $s => $val) {
-				if (preg_match('#' . $s . '#i', $type) !== false) {
+				if (preg_match('#' . $s . '#i', $type)) {
 					return $cache[$type] = $val;
 				}
 			}
