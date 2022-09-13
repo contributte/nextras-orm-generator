@@ -9,7 +9,7 @@ use Contributte\Nextras\Orm\Generator\Generator\IGenerator;
 class Generator
 {
 
-	/** @var Config  */
+	/** @var Config */
 	private $config;
 
 	/** @var IAnalyser */

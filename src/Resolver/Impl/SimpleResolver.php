@@ -45,7 +45,7 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 		$name = $this->normalize(ucfirst($table->getName()));
 
 		if ($singularize) {
-				$name = InflectorFactory::create()->build()->singularize($name);
+			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		return $name;
