@@ -4,4 +4,18 @@ includes:
 	- vendor/phpstan/phpstan-nette/rules.neon
 
 parameters:
+	level: 8
+	phpVersion: 70200
+
+	scanDirectories:
+		- src
+
+	fileExtensions:
+		- php
+
+	paths:
+		- src
+
+	ignoreErrors:
+
 	checkGenericClassInNonGenericObjectType: false
