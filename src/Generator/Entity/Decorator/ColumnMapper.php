@@ -14,7 +14,6 @@ class ColumnMapper implements IDecorator
 	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
 	{
 		switch ($column->getType()) {
-
 			// Map: DateTime
 			case ColumnTypes::TYPE_DATETIME:
 			case ColumnTypes::TYPE_DATE:

@@ -4,6 +4,7 @@ namespace Contributte\Nextras\Orm\Generator\Config;
 
 use ArrayAccess;
 use Nette\InvalidStateException;
+use ReturnTypeWillChange;
 
 class Config implements ArrayAccess
 {
@@ -139,7 +140,8 @@ class Config implements ArrayAccess
 	 * @return mixed
 	 * @throws InvalidStateException
 	 */
-	public function offsetGet($offset): mixed
+	#[ReturnTypeWillChange]
+	public function offsetGet($offset)
 	{
 		if ($this->offsetExists($offset)) {
 			return $this->config[$offset];

@@ -83,6 +83,7 @@ class ColumnDocumentor implements IDecorator
 		switch ($column->getType()) {
 			case ColumnTypes::TYPE_ENUM:
 				return $column->getSubtype();
+
 			default:
 				return $column->getType();
 		}
@@ -96,6 +97,7 @@ class ColumnDocumentor implements IDecorator
 		switch ($column->getType()) {
 			case ColumnTypes::TYPE_ENUM:
 				return 'self::' . $column->getDefault();
+
 			default:
 				return $column->getDefault();
 		}

@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Generator\Analyser\Database;
 
@@ -10,7 +12,7 @@ use Contributte\Nextras\Orm\Generator\Entity\Table;
 use Contributte\Nextras\Orm\Generator\Utils\ColumnTypes;
 use Contributte\Nextras\Orm\Generator\Utils\Helpers;
 use Nette\Database\Connection;
-use Nette\Database\ISupplementalDriver;
+use Nette\Database\Driver;
 use Nette\Utils\Strings;
 
 class DatabaseAnalyser implements IAnalyser
@@ -19,7 +21,7 @@ class DatabaseAnalyser implements IAnalyser
 	/** @var Connection */
 	private $connection;
 
-	/** @var ISupplementalDriver */
+	/** @var Driver */
 	private $driver;
 
 	public function __construct(string $dns, string $username, ?string $password = null)
@@ -33,7 +35,7 @@ class DatabaseAnalyser implements IAnalyser
 		return $this->connection;
 	}
 
-	public function getDriver(): ISupplementalDriver
+	public function getDriver(): Driver
 	{
 		return $this->driver;
 	}
@@ -63,8 +65,7 @@ class DatabaseAnalyser implements IAnalyser
 		// Analyse columns
 		$columns = $this->driver->getColumns($tableName);
 
-		foreach ($columns as $key => $col) {
-
+		foreach ($columns as $col) {
 			$column = new Column();
 			$column->setName($col['name']);
 			$column->setNullable($col['nullable']);
