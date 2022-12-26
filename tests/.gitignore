@@ -1,1 +1,11 @@
-output
+# Folders - recursive
+*.expected
+*.actual
+
+# Folders
+/tmp
+
+# Files
+/*.log
+/*.html
+/Fixtures/gosms.neon
