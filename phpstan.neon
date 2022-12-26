@@ -2,10 +2,11 @@ includes:
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- vendor/phpstan/phpstan-nette/extension.neon
 	- vendor/phpstan/phpstan-nette/rules.neon
+	# - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
 	level: 8
-	phpVersion: 70200
+	phpVersion: 80000
 
 	scanDirectories:
 		- src
@@ -17,5 +18,3 @@ parameters:
 		- src
 
 	ignoreErrors:
-
-	checkGenericClassInNonGenericObjectType: false

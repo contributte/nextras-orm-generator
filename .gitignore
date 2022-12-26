@@ -1,7 +1,9 @@
-# Folders
+# IDE
+/.idea
+
+# Composer
 /vendor
-.idea
-# Files
 /composer.lock
-/tests/*.log
-/tests/tmp
+
+# Tests
+/coverage.xml
