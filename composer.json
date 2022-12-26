@@ -13,20 +13,20 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
-    "nette/database": "^3.0.0",
-    "nette/php-generator": "^3.1.0",
-    "nette/utils": "^3.0.0",
+    "php": ">=8.0",
+    "nette/database": "^3.1.6",
+    "nette/php-generator": "^4.0.0",
+    "nette/utils": "^3.2.0",
     "doctrine/inflector": "^2.0.0"
   },
   "require-dev": {
     "ninjify/nunjuck": "^0.4",
     "ninjify/qa": "^0.14",
-    "phpstan/phpstan": "^1.0",
-    "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-nette": "^1.0",
-    "phpstan/phpstan-strict-rules": "^1.0",
-    "tracy/tracy": "^2.3.0"
+    "phpstan/phpstan": "^1.9.3",
+    "phpstan/phpstan-deprecation-rules": "^1.1.1",
+    "phpstan/phpstan-nette": "^1.2.0",
+    "phpstan/phpstan-strict-rules": "^1.4.4",
+    "tracy/tracy": "^2.9.5"
   },
   "autoload": {
     "psr-4": {
