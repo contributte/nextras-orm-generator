@@ -13,11 +13,11 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "nette/database": "^3.1.6",
-    "nette/php-generator": "^4.0.0",
-    "nette/utils": "^3.2.0",
-    "doctrine/inflector": "^2.0.0"
+    "php": ">=8.1",
+    "nette/database": "^3.1.9",
+    "nette/php-generator": "^4.1.2",
+    "nette/utils": "^4.0.3",
+    "doctrine/inflector": "^2.0.8"
   },
   "require-dev": {
     "ninjify/nunjuck": "^0.4",
