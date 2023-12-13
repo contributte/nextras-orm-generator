@@ -1,14 +1,12 @@
 <?php declare(strict_types = 1);
 
-/**
- * Test: Utils\DocBuilder
- */
-require __DIR__ . '/../../bootstrap.php';
-
 use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
+use Contributte\Tester\Toolkit;
 use Tester\Assert;
 
-test(function (): void {
+require __DIR__ . '/../../bootstrap.php';
+
+Toolkit::test(function (): void {
 	$b = new DocBuilder();
 	Assert::equal('', (string) $b);
 
