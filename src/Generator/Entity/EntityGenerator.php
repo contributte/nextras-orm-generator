@@ -16,11 +16,10 @@ use Nette\PhpGenerator\PhpNamespace;
 class EntityGenerator extends AbstractGenerator
 {
 
-	/** @var IEntityResolver */
-	private $resolver;
+	private IEntityResolver $resolver;
 
 	/** @var IDecorator[] */
-	private $decorators = [];
+	private array $decorators = [];
 
 	public function __construct(Config $config, IEntityResolver $resolver)
 	{
@@ -29,7 +28,7 @@ class EntityGenerator extends AbstractGenerator
 		$this->resolver = $resolver;
 
 		$this->decorators[] = new ColumnMapper();
-		$this->decorators[] = new ColumnDocumentor($resolver, $config->get('entity.generate.relations'));
+		$this->decorators[] = new ColumnDocumentor($resolver, $config->getBool('entity.generate.relations'));
 		$this->decorators[] = new ColumnConstantGenerator($config);
 	}
 
@@ -41,8 +40,8 @@ class EntityGenerator extends AbstractGenerator
 			$class = $namespace->addClass($this->resolver->resolveEntityName($table));
 
 			// Detect extends class
-			if (($extends = $this->config->get('entity.extends')) === null) {
-				$extends = $this->config->get('nextras.orm.class.entity');
+			if (($extends = $this->config->getString('entity.extends')) === '') {
+				$extends = $this->config->getString('nextras.orm.class.entity');
 			}
 
 			// Add namespace and extends class
@@ -51,8 +50,10 @@ class EntityGenerator extends AbstractGenerator
 
 			// Add table columns
 			foreach ($table->getColumns() as $column) {
-				if ($this->config->get('generator.entity.exclude.primary')) {
-					if ($column->isPrimary()) continue;
+				if ($this->config->getBool('generator.entity.exclude.primary')) {
+					if ($column->isPrimary())
+
+					continue;
 				}
 
 				foreach ($this->decorators as $decorator) {
@@ -65,19 +66,19 @@ class EntityGenerator extends AbstractGenerator
 		}
 
 		// Generate abstract base class
-		if ($this->config->get('entity.extends') !== null) {
+		if ($this->config->getString('entity.extends') !== '') {
 			// Create abstract class
-			$namespace = new PhpNamespace($this->config->get('entity.namespace'));
-			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('entity.extends')));
+			$namespace = new PhpNamespace($this->config->getString('entity.namespace'));
+			$class = $namespace->addClass(Helpers::extractShortName($this->config->getString('entity.extends')));
 			$class->setAbstract();
 
 			// Add extends from ORM/Entity
-			$extends = $this->config->get('nextras.orm.class.entity');
+			$extends = $this->config->getString('nextras.orm.class.entity');
 			$namespace->addUse($extends);
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('entity.extends')), $this->config->get('entity.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('entity.extends')), $this->config->getString('entity.folder')), (string) $namespace);
 		}
 	}
 

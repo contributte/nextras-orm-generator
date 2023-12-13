@@ -16,11 +16,9 @@ use Contributte\Nextras\Orm\Generator\Resolver\Impl\SimpleTogetherResolver;
 final class SimpleFactory
 {
 
-	/** @var Config */
-	private $config;
+	private Config $config;
 
-	/** @var IAnalyser */
-	private $analyser;
+	private IAnalyser $analyser;
 
 	public function __construct(Config $config, IAnalyser $analyser)
 	{

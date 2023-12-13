@@ -9,18 +9,16 @@ use LogicException;
 class Table
 {
 
-	/** @var Database|null */
-	private $database;
+	private ?Database $database = null;
 
-	/** @var string */
-	private $name;
+	private string $name;
 
 	/** @var Column[] */
-	private $columns = [];
+	private array $columns = [];
 
 	public function attach(Database $database): void
 	{
-		if ($this->database) {
+		if ($this->database !== null) {
 			throw new InvalidAttachException('Table is already attached to database.');
 		}
 
@@ -29,7 +27,7 @@ class Table
 
 	public function getDatabase(): Database
 	{
-		if (!$this->database) {
+		if ($this->database === null) {
 			throw new LogicException('Database is needed');
 		}
 

@@ -12,8 +12,7 @@ use Nette\PhpGenerator\PhpNamespace;
 class FacadeGenerator extends AbstractGenerator
 {
 
-	/** @var IFacadeResolver */
-	private $resolver;
+	private IFacadeResolver $resolver;
 
 	public function __construct(Config $config, IFacadeResolver $resolver)
 	{
@@ -30,7 +29,7 @@ class FacadeGenerator extends AbstractGenerator
 			$class = $namespace->addClass($this->resolver->resolveFacadeName($table));
 
 			// Detect extends class
-			if (($extends = $this->config->get('facade.extends')) !== null) {
+			if (($extends = $this->config->getString('facade.extends')) !== '') {
 				$namespace->addUse($extends);
 				$class->setExtends($extends);
 			}
@@ -40,14 +39,14 @@ class FacadeGenerator extends AbstractGenerator
 		}
 
 		// Generate abstract base class
-		if ($this->config->get('facade.extends') !== null) {
+		if ($this->config->getString('facade.extends') !== '') {
 			// Create abstract class
-			$namespace = new PhpNamespace($this->config->get('facade.namespace'));
-			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('facade.extends')));
+			$namespace = new PhpNamespace($this->config->getString('facade.namespace'));
+			$class = $namespace->addClass(Helpers::extractShortName($this->config->getString('facade.extends')));
 			$class->setAbstract(true);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('facade.extends')), $this->config->get('facade.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('facade.extends')), $this->config->getString('facade.folder')), (string) $namespace);
 		}
 	}
 

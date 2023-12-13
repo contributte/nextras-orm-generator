@@ -8,7 +8,7 @@ class Database
 {
 
 	/** @var Table[] */
-	private $tables = [];
+	private array $tables = [];
 
 	/**
 	 * @return Table[]

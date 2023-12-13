@@ -9,22 +9,21 @@ use Nette\Utils\FileSystem;
 abstract class AbstractGenerator implements IGenerator
 {
 
-	/** @var Config */
-	protected $config;
+	protected Config $config;
 
 	public function __construct(Config $config)
 	{
 		$this->config = $config;
 	}
 
+	abstract public function generate(Database $database): void;
+
 	/**
 	 * Generate file
 	 */
 	protected function generateFile(string $filename, string $code): void
 	{
-		FileSystem::write($this->config->get('output') . DIRECTORY_SEPARATOR . $filename, "<?php\n\n" . $code);
+		FileSystem::write($this->config->getString('output') . DIRECTORY_SEPARATOR . $filename, "<?php\n\n" . $code);
 	}
-
-	abstract public function generate(Database $database): void;
 
 }

@@ -8,48 +8,36 @@ use LogicException;
 class Column
 {
 
-	/** @var Table|null */
-	private $table;
+	private ?Table $table = null;
 
-	/** @var string */
-	private $name;
+	private ?string $name = null;
 
-	/** @var mixed */
-	private $type;
+	private ?string $type = null;
 
-	/** @var mixed */
-	private $subtype;
+	private ?string $subtype = null;
 
-	/** @var bool */
-	private $nullable;
+	private ?bool $nullable = null;
 
-	/** @var mixed */
-	private $default;
+	private ?string $default = null;
 
 	/** @var string[] */
-	private $enum = [];
+	private array $enum = [];
 
-	/** @var bool */
-	private $onUpdate;
+	private bool $onUpdate;
 
-	/** @var PhpDoc|null */
-	private $phpDoc;
+	private ?PhpDoc $phpDoc = null;
 
-	/** @var bool|null */
-	private $primary;
+	private ?bool $primary = null;
 
-	/** @var bool */
-	private $unique;
+	private bool $unique;
 
-	/** @var bool */
-	private $index;
+	private bool $index;
 
-	/** @var ForeignKey */
-	private $foreignKey;
+	private ForeignKey $foreignKey;
 
 	public function attach(Table $table): void
 	{
-		if ($this->table) {
+		if ($this->table !== null) {
 			throw new InvalidAttachException('Column is already attached to table.');
 		}
 
@@ -58,7 +46,7 @@ class Column
 
 	public function getTable(): Table
 	{
-		if (!$this->table) {
+		if ($this->table === null) {
 			throw new LogicException('Table is needed');
 		}
 
@@ -67,6 +55,10 @@ class Column
 
 	public function getName(): string
 	{
+		if ($this->name === null) {
+			throw new LogicException('Name is needed');
+		}
+
 		return $this->name;
 	}
 
@@ -75,39 +67,35 @@ class Column
 		$this->name = $name;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getType()
+	public function getType(): string
 	{
+		if ($this->type === null) {
+			throw new LogicException('Type is needed');
+		}
+
 		return $this->type;
 	}
 
-	/**
-	 * @param mixed $type
-	 */
-	public function setType($type): void
+	public function setType(string $type): void
 	{
 		$this->type = $type;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getSubtype()
+	public function getSubtype(): string
 	{
+		if ($this->subtype === null) {
+			throw new LogicException('Subtype is needed');
+		}
+
 		return $this->subtype;
 	}
 
-	/**
-	 * @param mixed $subtype
-	 */
-	public function setSubtype($subtype): void
+	public function setSubtype(string $subtype): void
 	{
 		$this->subtype = $subtype;
 	}
 
-	public function isNullable(): bool
+	public function isNullable(): ?bool
 	{
 		return $this->nullable;
 	}
@@ -117,18 +105,12 @@ class Column
 		$this->nullable = $nullable;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getDefault()
+	public function getDefault(): ?string
 	{
 		return $this->default;
 	}
 
-	/**
-	 * @param mixed $default
-	 */
-	public function setDefault($default): void
+	public function setDefault(string $default): void
 	{
 		$this->default = $default;
 	}
@@ -161,7 +143,7 @@ class Column
 
 	public function getPhpDoc(): PhpDoc
 	{
-		if (!$this->phpDoc) {
+		if ($this->phpDoc === null) {
 			$this->phpDoc = new PhpDoc();
 		}
 

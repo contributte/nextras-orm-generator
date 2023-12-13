@@ -18,7 +18,7 @@ class Config implements ArrayAccess
 	public const STRATEGY_SEPARATE = 2;
 
 	/** @var mixed[] */
-	protected $defaults = [
+	protected array $defaults = [
 		// Output folder
 		'output' => null,
 		// 1 => Entity + Repository + Mapper + Facade => same folder (folder = table name)
@@ -80,7 +80,7 @@ class Config implements ArrayAccess
 	];
 
 	/** @var mixed[] */
-	protected $config = [];
+	protected array $config = [];
 
 	/**
 	 * @param mixed[] $configuration
@@ -88,51 +88,37 @@ class Config implements ArrayAccess
 	public function __construct(array $configuration)
 	{
 		// Validate config
-		if ($extra = array_diff_key($configuration, $this->defaults)) {
+		if (($extra = array_diff_key($configuration, $this->defaults)) !== []) {
 			$extra = implode(', ', array_keys($extra));
+
 			throw new InvalidStateException('Unknown configuration option ' . $extra . '.');
 		}
 
 		$this->config = array_merge($this->defaults, $configuration);
 	}
 
-	/**
-	 * MAGIC METHODS ***********************************************************
-	 */
-
-	/**
-	 * @return mixed
-	 */
-	public function __get(string $name)
+	public function get(string $name): mixed
 	{
 		return $this->offsetGet($name);
 	}
 
-	/**
-	 * @param string|mixed $name
-	 * @param mixed $value
-	 */
-	public function __set($name, $value): void
+	public function getString(string $name): string
 	{
-		$this->offsetSet($name, $value);
+		$ret = $this->offsetGet($name);
+		assert(is_string($ret));
+
+		return $ret;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function get(string $name)
+	public function getBool(string $name): bool
 	{
-		return $this->offsetGet($name);
+		$ret = $this->offsetGet($name);
+		assert(is_bool($ret));
+
+		return $ret;
 	}
 
-	/**
-	 * ARRAY ACCESS ************************************************************
-	 */
-
-	/**
-	 * @param mixed $offset
-	 */
-	public function offsetExists($offset): bool
+	public function offsetExists(mixed $offset): bool
 	{
 		return array_key_exists($offset, $this->config);
 	}
@@ -149,21 +135,24 @@ class Config implements ArrayAccess
 		throw new InvalidStateException('Undefined offset: ' . $offset);
 	}
 
-	/**
-	 * @param string|mixed $offset
-	 * @param mixed $value
-	 */
-	public function offsetSet($offset, $value): void
+	public function offsetSet(mixed $offset, mixed $value): void
 	{
 		$this->config[$offset] = $value;
 	}
 
-	/**
-	 * @param mixed $offset
-	 */
-	public function offsetUnset($offset): void
+	public function offsetUnset(mixed $offset): void
 	{
 		unset($this->config[$offset]);
+	}
+
+	public function __get(string $name): mixed
+	{
+		return $this->offsetGet($name);
+	}
+
+	public function __set(string $name, ?string $value): void
+	{
+		$this->offsetSet($name, $value);
 	}
 
 }

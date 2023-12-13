@@ -5,17 +5,13 @@ namespace Contributte\Nextras\Orm\Generator\Entity;
 class ForeignKey
 {
 
-	/** @var string */
-	private $sourceTable;
+	private string $sourceTable;
 
-	/** @var string */
-	private $sourceColumn;
+	private string $sourceColumn;
 
-	/** @var string */
-	private $referenceTable;
+	private string $referenceTable;
 
-	/** @var string */
-	private $referenceColumn;
+	private string $referenceColumn;
 
 	public function getSourceTable(): string
 	{

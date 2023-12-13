@@ -16,3 +16,4 @@ parameters:
 		- .docs
 
 	ignoreErrors:
+		- '#Construct empty\(\) is not allowed. Use more strict comparison\.#'

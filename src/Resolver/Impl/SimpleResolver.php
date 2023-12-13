@@ -16,8 +16,7 @@ use Doctrine\Inflector\InflectorFactory;
 abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, IMapperResolver, IFacadeResolver, IModelResolver
 {
 
-	/** @var Config */
-	protected $config;
+	protected Config $config;
 
 	public function __construct(Config $config)
 	{
@@ -26,7 +25,22 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 
 	public function resolveFilename(string $name, ?string $folder = null): string
 	{
-		return ($folder ? $folder . Helpers::DS : null) . $this->normalize(ucfirst($name)) . '.' . IFilenameResolver::PHP_EXT;
+		return ($folder !== null ? $folder . Helpers::DS : null) . $this->normalize(ucfirst($name)) . '.' . IFilenameResolver::PHP_EXT;
+	}
+
+	public function resolveModelName(): string
+	{
+		return $this->config->getString('model.name');
+	}
+
+	public function resolveModelNamespace(): string
+	{
+		return $this->config->getString('model.namespace');
+	}
+
+	public function resolveModelFilename(): string
+	{
+		return $this->config->getString('model.filename');
 	}
 
 	protected function normalize(string $name): string
@@ -49,21 +63,6 @@ abstract class SimpleResolver implements IEntityResolver, IRepositoryResolver, I
 		}
 
 		return $name;
-	}
-
-	public function resolveModelName(): string
-	{
-		return $this->config->get('model.name');
-	}
-
-	public function resolveModelNamespace(): string
-	{
-		return $this->config->get('model.namespace');
-	}
-
-	public function resolveModelFilename(): string
-	{
-		return $this->config->get('model.filename');
 	}
 
 }

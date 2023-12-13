@@ -7,29 +7,21 @@ use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
 class PhpDoc
 {
 
-	/** @var string */
-	private $annotation;
+	private string $annotation;
 
-	/** @var string */
-	private $type;
+	private string $type;
 
-	/** @var string */
-	private $variable;
+	private string $variable;
 
-	/** @var string */
-	private $enum;
+	private string $enum;
 
-	/** @var string */
-	private $default;
+	private ?string $default;
 
-	/** @var bool */
-	private $virtual;
+	private bool $virtual;
 
-	/** @var bool */
-	private $primary;
+	private bool $primary;
 
-	/** @var PhpRelDoc|null */
-	private $relation;
+	private ?PhpRelDoc $relation = null;
 
 	public function getAnnotation(): string
 	{
@@ -71,12 +63,12 @@ class PhpDoc
 		$this->enum = $enum;
 	}
 
-	public function getDefault(): string
+	public function getDefault(): ?string
 	{
 		return $this->default;
 	}
 
-	public function setDefault(string $default): void
+	public function setDefault(?string $default): void
 	{
 		$this->default = $default;
 	}
@@ -88,7 +80,7 @@ class PhpDoc
 
 	public function setVirtual(bool $virtual): void
 	{
-		$this->virtual = (bool) $virtual;
+		$this->virtual = $virtual;
 	}
 
 	public function getRelation(): ?PhpRelDoc
@@ -116,7 +108,7 @@ class PhpDoc
 		$b = new DocBuilder();
 
 		// Anotation (@..)
-		if ($this->annotation) {
+		if ($this->annotation !== '') {
 			$b->append($this->annotation);
 		} else {
 			if ($this->virtual) {
@@ -133,12 +125,12 @@ class PhpDoc
 		$b->append(sprintf('$%s', $this->variable));
 
 		// Default
-		if ($this->default) {
+		if ($this->default !== '') {
 			$b->append(sprintf('{default %s}', $this->default));
 		}
 
 		// Enum {enum ..}
-		if ($this->enum) {
+		if ($this->enum !== '') {
 			$b->append(sprintf('{enum self::%s_*}', $this->enum));
 		}
 
@@ -152,7 +144,7 @@ class PhpDoc
 		}
 
 		// Relation
-		if ($this->relation) {
+		if ($this->relation !== null) {
 			$b->append(sprintf('{%s}', (string) $this->relation));
 		}
 

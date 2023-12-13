@@ -16,11 +16,9 @@ use Nette\Utils\Strings;
 class ColumnDocumentor implements IDecorator
 {
 
-	/** @var IEntityResolver */
-	private $resolver;
+	private IEntityResolver $resolver;
 
-	/** @var bool */
-	private $generateRelations;
+	private bool $generateRelations;
 
 	public function __construct(IEntityResolver $resolver, bool $generateRelations)
 	{
@@ -36,7 +34,7 @@ class ColumnDocumentor implements IDecorator
 		$doc->setAnnotation('@property');
 
 		// Type
-		$doc->setType($this->getRealType($column) . ($column->isNullable() ? '|NULL' : ''));
+		$doc->setType($this->getRealType($column) . ($column->isNullable() === true ? '|NULL' : ''));
 
 		// Variable
 		$doc->setVariable(Helpers::camelCase($column->getName()));
@@ -60,7 +58,7 @@ class ColumnDocumentor implements IDecorator
 			$doc->setType($this->resolver->resolveEntityName($ftable));
 			$doc->setRelation($relDoc = new PhpRelDoc());
 
-			if (($use = $this->getRealUse($ftable, $namespace))) {
+			if (($use = $this->getRealUse($ftable, $namespace)) !== null) {
 				$namespace->addUse($use);
 			}
 
@@ -75,38 +73,27 @@ class ColumnDocumentor implements IDecorator
 		$class->addComment((string) $column->getPhpDoc());
 	}
 
-	/**
-	 * @return mixed
-	 */
-	protected function getRealType(Column $column)
+	protected function getRealType(Column $column): string
 	{
 		switch ($column->getType()) {
 			case ColumnTypes::TYPE_ENUM:
 				return $column->getSubtype();
-
 			default:
 				return $column->getType();
 		}
 	}
 
-	/**
-	 * @return mixed
-	 */
-	protected function getRealDefault(Column $column)
+	protected function getRealDefault(Column $column): ?string
 	{
 		switch ($column->getType()) {
 			case ColumnTypes::TYPE_ENUM:
 				return 'self::' . $column->getDefault();
-
 			default:
 				return $column->getDefault();
 		}
 	}
 
-	/**
-	 * @return mixed
-	 */
-	protected function getRealUse(Table $table, PhpNamespace $namespace)
+	protected function getRealUse(Table $table, PhpNamespace $namespace): ?string
 	{
 		if ($namespace->getName() === $this->resolver->resolveEntityNamespace($table)) {
 			return null;

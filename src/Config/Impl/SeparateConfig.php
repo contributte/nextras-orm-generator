@@ -8,7 +8,7 @@ class SeparateConfig extends Config
 {
 
 	/** @var mixed[] */
-	protected $defaults = [
+	protected array $defaults = [
 		// Output folder
 		'output' => null,
 		// Generator

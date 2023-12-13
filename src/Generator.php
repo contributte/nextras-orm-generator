@@ -9,26 +9,19 @@ use Contributte\Nextras\Orm\Generator\Generator\IGenerator;
 class Generator
 {
 
-	/** @var Config */
-	private $config;
+	private Config $config;
 
-	/** @var IAnalyser */
-	private $analyser;
+	private IAnalyser $analyser;
 
-	/** @var IGenerator */
-	private $entityGenerator;
+	private IGenerator $entityGenerator;
 
-	/** @var IGenerator */
-	private $repositoryGenerator;
+	private IGenerator $repositoryGenerator;
 
-	/** @var IGenerator */
-	private $mapperGenerator;
+	private IGenerator $mapperGenerator;
 
-	/** @var IGenerator */
-	private $facadeGenerator;
+	private IGenerator $facadeGenerator;
 
-	/** @var IGenerator */
-	private $modelGenerator;
+	private IGenerator $modelGenerator;
 
 	public function __construct(Config $config, IAnalyser $analyser)
 	{
@@ -93,23 +86,23 @@ class Generator
 	{
 		$database = $this->analyser->analyse();
 
-		if ($this->config->get('generator.generate.entities')) {
+		if ($this->config->getBool('generator.generate.entities')) {
 			$this->entityGenerator->generate($database);
 		}
 
-		if ($this->config->get('generator.generate.repositories')) {
+		if ($this->config->getBool('generator.generate.repositories')) {
 			$this->repositoryGenerator->generate($database);
 		}
 
-		if ($this->config->get('generator.generate.mappers')) {
+		if ($this->config->getBool('generator.generate.mappers')) {
 			$this->mapperGenerator->generate($database);
 		}
 
-		if ($this->config->get('generator.generate.facades')) {
+		if ($this->config->getBool('generator.generate.facades')) {
 			$this->facadeGenerator->generate($database);
 		}
 
-		if ($this->config->get('generator.generate.model')) {
+		if ($this->config->getBool('generator.generate.model')) {
 			$this->modelGenerator->generate($database);
 		}
 	}

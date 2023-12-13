@@ -12,8 +12,7 @@ use Nette\PhpGenerator\PhpNamespace;
 class MapperGenerator extends AbstractGenerator
 {
 
-	/** @var IMapperResolver */
-	private $resolver;
+	private IMapperResolver $resolver;
 
 	public function __construct(Config $config, IMapperResolver $resolver)
 	{
@@ -30,7 +29,7 @@ class MapperGenerator extends AbstractGenerator
 			$class = $namespace->addClass($this->resolver->resolveMapperName($table));
 
 			// Detect extends class
-			if (($extends = $this->config->get('mapper.extends')) !== null) {
+			if (($extends = $this->config->getString('mapper.extends')) !== '') {
 				$namespace->addUse($extends);
 				$class->setExtends($extends);
 			}
@@ -45,19 +44,19 @@ class MapperGenerator extends AbstractGenerator
 		}
 
 		// Generate abstract base class
-		if ($this->config->get('mapper.extends') !== null) {
+		if ($this->config->getString('mapper.extends') !== '') {
 			// Create abstract class
-			$namespace = new PhpNamespace($this->config->get('mapper.namespace'));
-			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('mapper.extends')));
+			$namespace = new PhpNamespace($this->config->getString('mapper.namespace'));
+			$class = $namespace->addClass(Helpers::extractShortName($this->config->getString('mapper.extends')));
 			$class->setAbstract(true);
 
 			// Add extends from ORM/Mapper
-			$extends = $this->config->get('nextras.orm.class.mapper');
+			$extends = $this->config->getString('nextras.orm.class.mapper');
 			$namespace->addUse($extends);
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('mapper.extends')), $this->config->get('mapper.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('mapper.extends')), $this->config->getString('mapper.folder')), (string) $namespace);
 		}
 	}
 

@@ -6,24 +6,27 @@ class DocBuilder
 {
 
 	/** @var string[] */
-	private $builder = [];
+	private array $builder = [];
 
 	public function append(string $str): self
 	{
 		$this->str($str);
 		$this->space();
+
 		return $this;
 	}
 
 	public function str(string $str): self
 	{
 		$this->builder[] = $str;
+
 		return $this;
 	}
 
 	public function space(): self
 	{
 		$this->builder[] = ' ';
+
 		return $this;
 	}
 

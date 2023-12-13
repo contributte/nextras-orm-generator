@@ -17,7 +17,7 @@ class SimpleTogetherResolver extends SimpleResolver
 
 	public function resolveEntityNamespace(Table $table): string
 	{
-		return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table, $this->config->get('orm.singularize'));
+		return $this->config->getString('orm.namespace') . Helpers::NS . $this->table($table, $this->config->getBool('orm.singularize'));
 	}
 
 	public function resolveEntityFilename(Table $table): string
@@ -32,7 +32,7 @@ class SimpleTogetherResolver extends SimpleResolver
 
 	public function resolveRepositoryNamespace(Table $table): string
 	{
-		return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table);
+		return $this->config->getString('orm.namespace') . Helpers::NS . $this->table($table);
 	}
 
 	public function resolveRepositoryFilename(Table $table): string
@@ -47,7 +47,7 @@ class SimpleTogetherResolver extends SimpleResolver
 
 	public function resolveMapperNamespace(Table $table): string
 	{
-		return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table, $this->config->get('orm.singularize'));
+		return $this->config->getString('orm.namespace') . Helpers::NS . $this->table($table, $this->config->getBool('orm.singularize'));
 	}
 
 	public function resolveMapperFilename(Table $table): string
@@ -60,40 +60,42 @@ class SimpleTogetherResolver extends SimpleResolver
 		return $this->resolveName('facade', $table);
 	}
 
+	public function resolveFacadeNamespace(Table $table): string
+	{
+		return $this->config->getString('orm.namespace') . Helpers::NS . $this->table($table);
+	}
+
+	public function resolveFacadeFilename(Table $table): string
+	{
+		return $this->resolveFilenameFor('facade', $table);
+	}
+
 	/**
 	 * @param string $type (entity,repository,mapper,facade)
 	 */
 	protected function resolveName(string $type, Table $table): string
 	{
 		$name = ucfirst($table->getName());
-		if (!empty($this->config->get($type . '.name.singularize'))) {
+		if (!empty($this->config->getString($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		$name .= $this->config->get($type . '.name.suffix');
+
 		return $this->normalize($name);
 	}
 
 	protected function resolveFilenameFor(string $type, Table $table): string
 	{
-		$folder = $this->table($table, $this->config->get('orm.singularize'));
+		$folder = $this->table($table, $this->config->getBool('orm.singularize'));
 		$name = ucfirst($table->getName());
-		if (!empty($this->config->get($type . '.name.singularize'))) {
+		if (!empty($this->config->getString($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
 		$filename = $this->normalize($name . $this->config->get($type . '.filename.suffix')) . '.' . IFilenameResolver::PHP_EXT;
+
 		return $folder . Helpers::DS . $filename;
-	}
-
-	public function resolveFacadeNamespace(Table $table): string
-	{
-		return $this->config->get('orm.namespace') . Helpers::NS . $this->table($table);
-	}
-
-	public function resolveFacadeFilename(Table $table): string
-	{
-		return $this->resolveFilenameFor('facade', $table);
 	}
 
 }

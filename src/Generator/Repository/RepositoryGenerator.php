@@ -13,11 +13,9 @@ use Nette\PhpGenerator\PhpNamespace;
 class RepositoryGenerator extends AbstractGenerator
 {
 
-	/** @var IRepositoryResolver */
-	private $resolver;
+	private IRepositoryResolver $resolver;
 
-	/** @var IEntityResolver */
-	private $entityResolver;
+	private IEntityResolver $entityResolver;
 
 	public function __construct(Config $config, IRepositoryResolver $resolver, IEntityResolver $entityResolver)
 	{
@@ -35,7 +33,7 @@ class RepositoryGenerator extends AbstractGenerator
 			$class = $namespace->addClass($this->resolver->resolveRepositoryName($table));
 
 			// Detect extends class
-			if (($extends = $this->config->get('repository.extends')) !== null) {
+			if (($extends = $this->config->getString('repository.extends')) !== '') {
 				$namespace->addUse($extends);
 				$class->setExtends($extends);
 			}
@@ -53,19 +51,19 @@ class RepositoryGenerator extends AbstractGenerator
 		}
 
 		// Generate abstract base class
-		if ($this->config->get('repository.extends') !== null) {
+		if ($this->config->getString('repository.extends') !== '') {
 			// Create abstract class
-			$namespace = new PhpNamespace($this->config->get('repository.namespace'));
-			$class = $namespace->addClass(Helpers::extractShortName($this->config->get('repository.extends')));
+			$namespace = new PhpNamespace($this->config->getString('repository.namespace'));
+			$class = $namespace->addClass(Helpers::extractShortName($this->config->getString('repository.extends')));
 			$class->setAbstract(true);
 
 			// Add extends from ORM/Repository
-			$extends = $this->config->get('nextras.orm.class.repository');
+			$extends = $this->config->getString('nextras.orm.class.repository');
 			$namespace->addUse($extends);
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->get('repository.extends')), $this->config->get('repository.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('repository.extends')), $this->config->getString('repository.folder')), (string) $namespace);
 		}
 	}
 

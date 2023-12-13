@@ -15,18 +15,16 @@ use Nette\PhpGenerator\PhpNamespace;
 class ModelGenerator extends AbstractGenerator
 {
 
-	/** @var IModelResolver */
-	private $modelResolver;
+	private IModelResolver $modelResolver;
 
-	/** @var IRepositoryResolver */
-	private $repositoryResolver;
+	private IRepositoryResolver $repositoryResolver;
 
-	/** @var IEntityResolver */
-	private $entityResolver;
+	private IEntityResolver $entityResolver;
 
 	public function __construct(Config $config, IModelResolver $resolver, IRepositoryResolver $repositoryResolver, IEntityResolver $entityResolver)
 	{
 		parent::__construct($config);
+
 		$this->modelResolver = $resolver;
 		$this->repositoryResolver = $repositoryResolver;
 		$this->entityResolver = $entityResolver;
@@ -35,7 +33,7 @@ class ModelGenerator extends AbstractGenerator
 	public function generate(Database $database): void
 	{
 		$namespace = new PhpNamespace($this->modelResolver->resolveModelNamespace());
-		$nextrasModelClass = $this->config->get('nextras.orm.class.model');
+		$nextrasModelClass = $this->config->getString('nextras.orm.class.model');
 		$namespace->addUse($nextrasModelClass);
 		$class = $namespace->addClass($this->modelResolver->resolveModelName());
 		$class->setExtends($nextrasModelClass);

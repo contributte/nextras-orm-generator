@@ -16,11 +16,9 @@ use Nette\Utils\Strings;
 class DatabaseAnalyser implements IAnalyser
 {
 
-	/** @var Connection */
-	private $connection;
+	private Connection $connection;
 
-	/** @var Driver */
-	private $driver;
+	private Driver $driver;
 
 	public function __construct(string $dns, string $username, ?string $password = null)
 	{
@@ -69,7 +67,7 @@ class DatabaseAnalyser implements IAnalyser
 			$column->setNullable($col['nullable']);
 			$column->setType(Helpers::columnType($col['nativetype']));
 			$column->setDefault($col['default']);
-			$column->setOnUpdate(Strings::contains($col['vendor']['extra'] ?? $col['vendor']['Extra'], 'on update'));
+			$column->setOnUpdate(str_contains($col['vendor']['extra'] ?? $col['vendor']['Extra'], 'on update'));
 
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {

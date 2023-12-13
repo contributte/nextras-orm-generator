@@ -16,7 +16,7 @@ class SimpleSeparateResolver extends SimpleResolver
 
 	public function resolveEntityNamespace(Table $table): string
 	{
-		return $this->config->get('entity.namespace');
+		return $this->config->getString('entity.namespace');
 	}
 
 	public function resolveEntityFilename(Table $table): string
@@ -31,7 +31,7 @@ class SimpleSeparateResolver extends SimpleResolver
 
 	public function resolveRepositoryNamespace(Table $table): string
 	{
-		return $this->config->get('repository.namespace');
+		return $this->config->getString('repository.namespace');
 	}
 
 	public function resolveRepositoryFilename(Table $table): string
@@ -51,7 +51,7 @@ class SimpleSeparateResolver extends SimpleResolver
 
 	public function resolveMapperNamespace(Table $table): string
 	{
-		return $this->config->get('mapper.namespace');
+		return $this->config->getString('mapper.namespace');
 	}
 
 	public function resolveFacadeName(Table $table): string
@@ -61,7 +61,7 @@ class SimpleSeparateResolver extends SimpleResolver
 
 	public function resolveFacadeNamespace(Table $table): string
 	{
-		return $this->config->get('facade.namespace');
+		return $this->config->getString('facade.namespace');
 	}
 
 	public function resolveFacadeFilename(Table $table): string
@@ -75,22 +75,23 @@ class SimpleSeparateResolver extends SimpleResolver
 	protected function resolveFilenameFor(string $type, Table $table): string
 	{
 		$name = $this->normalize(ucfirst($table->getName()));
-		if (!empty($this->config->get($type . '.name.singularize'))) {
+		if (!empty($this->config->getBool($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
-		$name .= $this->config->get($type . '.filename.suffix');
-		return $this->config->get($type . '.folder') . DIRECTORY_SEPARATOR . $name . '.' . IFilenameResolver::PHP_EXT;
+		$name .= $this->config->getString($type . '.filename.suffix');
+
+		return $this->config->getString($type . '.folder') . DIRECTORY_SEPARATOR . $name . '.' . IFilenameResolver::PHP_EXT;
 	}
 
 	protected function resolveNameFor(string $type, Table $table): string
 	{
 		$name = $this->normalize(ucfirst($table->getName()));
-		if (!empty($this->config->get($type . '.name.singularize'))) {
+		if (!empty($this->config->getBool($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
-		return $name . $this->config->get($type . '.name.suffix');
+		return $name . $this->config->getString($type . '.name.suffix');
 	}
 
 }

@@ -19,7 +19,7 @@ class Helpers
 	public const DS = DIRECTORY_SEPARATOR;
 
 	/** @var string[] */
-	public static $typePatterns = [
+	public static array $typePatterns = [
 		'^_' => ColumnTypes::TYPE_TEXT, // PostgreSQL arrays
 		'BYTEA|BLOB|BIN' => ColumnTypes::TYPE_TEXT,
 		'TEXT|CHAR|POINT|INTERVAL' => ColumnTypes::TYPE_TEXT,
@@ -32,7 +32,7 @@ class Helpers
 	];
 
 	/** @var string[] */
-	public static $mnDelimiters = [
+	public static array $mnDelimiters = [
 		'_to_',
 		'_has_',
 		'_x_',
@@ -45,6 +45,7 @@ class Helpers
 		$s = (string) preg_replace('#[_-](?=[a-z])#', ' ', $s);
 		$s = substr(ucwords('x' . $s), 1);
 		$s = str_replace(' ', '', $s);
+
 		return $s;
 	}
 
@@ -54,7 +55,7 @@ class Helpers
 		if (!isset($cache[$type])) {
 			$cache[$type] = 'string';
 			foreach (self::$typePatterns as $s => $val) {
-				if (preg_match('#' . $s . '#i', $type)) {
+				if (preg_match('#' . $s . '#i', $type) !== false) {
 					return $cache[$type] = $val;
 				}
 			}

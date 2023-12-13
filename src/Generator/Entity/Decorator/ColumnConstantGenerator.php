@@ -12,22 +12,20 @@ use Nette\Utils\Strings;
 class ColumnConstantGenerator implements IDecorator
 {
 
-	/** @var Config */
-	private $config;
+	private Config $config;
 
 	public function __construct(Config $config)
 	{
 		$this->config = $config;
 	}
 
-
 	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
 	{
-		if (!$this->config->get('entity.generate.column.constant')) {
+		if ($this->config->getString('entity.generate.column.constant') === '') {
 			return;
 		}
 
-		$name = Strings::upper($this->config->get('entity.column.constants.prefix') . $column->getName());
+		$name = Strings::upper($this->config->getString('entity.column.constants.prefix') . $column->getName());
 		$class->addConstant($name, Helpers::camelCase($column->getName()));
 	}
 
