@@ -20,13 +20,10 @@
     "doctrine/inflector": "^2.0.8"
   },
   "require-dev": {
-    "ninjify/nunjuck": "^0.4",
-    "ninjify/qa": "^0.14",
-    "phpstan/phpstan": "^1.9.3",
-    "phpstan/phpstan-deprecation-rules": "^1.1.1",
-    "phpstan/phpstan-nette": "^1.2.0",
-    "phpstan/phpstan-strict-rules": "^1.4.4",
-    "tracy/tracy": "^2.9.5"
+    "contributte/qa": "^0.4",
+    "contributte/tester": "^0.4",
+    "contributte/phpstan": "^0.1",
+    "tracy/tracy": "^2.10.5"
   },
   "autoload": {
     "psr-4": {
