@@ -7,23 +7,23 @@ use Contributte\Nextras\Orm\Generator\Utils\DocBuilder;
 class PhpDoc
 {
 
-	private string $annotation;
+	private ?string $annotation = null;
 
-	private string $type;
+	private ?string $type = null;
 
-	private string $variable;
+	private ?string $variable = null;
 
-	private string $enum;
+	private ?string $enum = null;
 
-	private ?string $default;
+	private ?string $default = null;
 
-	private bool $virtual;
+	private bool $virtual = false;
 
-	private bool $primary;
+	private bool $primary = false;
 
 	private ?PhpRelDoc $relation = null;
 
-	public function getAnnotation(): string
+	public function getAnnotation(): ?string
 	{
 		return $this->annotation;
 	}
@@ -33,7 +33,7 @@ class PhpDoc
 		$this->annotation = $annotation;
 	}
 
-	public function getType(): string
+	public function getType(): ?string
 	{
 		return $this->type;
 	}
@@ -43,7 +43,7 @@ class PhpDoc
 		$this->type = $type;
 	}
 
-	public function getVariable(): string
+	public function getVariable(): ?string
 	{
 		return $this->variable;
 	}
@@ -53,7 +53,7 @@ class PhpDoc
 		$this->variable = $variable;
 	}
 
-	public function getEnum(): string
+	public function getEnum(): ?string
 	{
 		return $this->enum;
 	}
@@ -108,7 +108,7 @@ class PhpDoc
 		$b = new DocBuilder();
 
 		// Anotation (@..)
-		if ($this->annotation !== '') {
+		if ($this->annotation !== null && $this->annotation !== '') {
 			$b->append($this->annotation);
 		} else {
 			if ($this->virtual) {
@@ -119,7 +119,9 @@ class PhpDoc
 		}
 
 		// Type (int, string..)
-		$b->append($this->type);
+		if ($this->type !== null) {
+			$b->append($this->type);
+		}
 
 		// Variable ($..)
 		$b->append(sprintf('$%s', $this->variable));

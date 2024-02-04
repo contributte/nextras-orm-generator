@@ -76,7 +76,7 @@ class SimpleTogetherResolver extends SimpleResolver
 	protected function resolveName(string $type, Table $table): string
 	{
 		$name = ucfirst($table->getName());
-		if (!empty($this->config->getString($type . '.name.singularize'))) {
+		if (!empty($this->config->getBool($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 
@@ -89,7 +89,7 @@ class SimpleTogetherResolver extends SimpleResolver
 	{
 		$folder = $this->table($table, $this->config->getBool('orm.singularize'));
 		$name = ucfirst($table->getName());
-		if (!empty($this->config->getString($type . '.name.singularize'))) {
+		if (!empty($this->config->getBool($type . '.name.singularize'))) {
 			$name = InflectorFactory::create()->build()->singularize($name);
 		}
 

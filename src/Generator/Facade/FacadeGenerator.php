@@ -46,7 +46,7 @@ class FacadeGenerator extends AbstractGenerator
 			$class->setAbstract(true);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('facade.extends')), $this->config->getString('facade.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('facade.extends')), $this->config->getStringNull('facade.folder')), (string) $namespace);
 		}
 	}
 

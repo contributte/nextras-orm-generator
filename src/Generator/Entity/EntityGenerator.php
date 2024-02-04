@@ -78,7 +78,7 @@ class EntityGenerator extends AbstractGenerator
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('entity.extends')), $this->config->getString('entity.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('entity.extends')), $this->config->getStringNull('entity.folder')), (string) $namespace);
 		}
 	}
 

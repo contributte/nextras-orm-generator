@@ -20,7 +20,7 @@ class DatabaseAnalyser implements IAnalyser
 
 	private Driver $driver;
 
-	public function __construct(string $dns, string $username, ?string $password = null)
+	public function __construct(string $dns, ?string $username = null, ?string $password = null)
 	{
 		$this->connection = new Connection($dns, $username, $password);
 		$this->driver = $this->connection->getDriver();
@@ -67,7 +67,7 @@ class DatabaseAnalyser implements IAnalyser
 			$column->setNullable($col['nullable']);
 			$column->setType(Helpers::columnType($col['nativetype']));
 			$column->setDefault($col['default']);
-			$column->setOnUpdate(str_contains($col['vendor']['extra'] ?? $col['vendor']['Extra'], 'on update'));
+			$column->setOnUpdate(str_contains($col['vendor']['extra'] ?? $col['vendor']['Extra'] ?? '', 'on update'));
 
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {

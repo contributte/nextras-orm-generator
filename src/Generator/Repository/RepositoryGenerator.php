@@ -63,7 +63,7 @@ class RepositoryGenerator extends AbstractGenerator
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('repository.extends')), $this->config->getString('repository.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('repository.extends')), $this->config->getStringNull('repository.folder')), (string) $namespace);
 		}
 	}
 

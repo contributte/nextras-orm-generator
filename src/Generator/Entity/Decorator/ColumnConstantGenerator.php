@@ -21,7 +21,7 @@ class ColumnConstantGenerator implements IDecorator
 
 	public function doDecorate(Column $column, ClassType $class, PhpNamespace $namespace): void
 	{
-		if ($this->config->getString('entity.generate.column.constant') === '') {
+		if (!$this->config->getBool('entity.generate.column.constant')) {
 			return;
 		}
 

@@ -56,7 +56,7 @@ class MapperGenerator extends AbstractGenerator
 			$class->setExtends($extends);
 
 			// Save file
-			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('mapper.extends')), $this->config->getString('mapper.folder')), (string) $namespace);
+			$this->generateFile($this->resolver->resolveFilename(Helpers::extractShortName($this->config->getString('mapper.extends')), $this->config->getStringNull('mapper.folder')), (string) $namespace);
 		}
 	}
 

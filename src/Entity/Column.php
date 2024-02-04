@@ -29,11 +29,11 @@ class Column
 
 	private ?bool $primary = null;
 
-	private bool $unique;
+	private bool $unique = false;
 
-	private bool $index;
+	private bool $index = false;
 
-	private ForeignKey $foreignKey;
+	private ?ForeignKey $foreignKey = null;
 
 	public function attach(Table $table): void
 	{
@@ -110,7 +110,7 @@ class Column
 		return $this->default;
 	}
 
-	public function setDefault(string $default): void
+	public function setDefault(?string $default): void
 	{
 		$this->default = $default;
 	}

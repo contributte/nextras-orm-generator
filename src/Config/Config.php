@@ -110,6 +110,14 @@ class Config implements ArrayAccess
 		return $ret;
 	}
 
+	public function getStringNull(string $name): ?string
+	{
+		$ret = $this->offsetGet($name);
+		assert(is_string($ret) || $ret === null);
+
+		return $ret;
+	}
+
 	public function getBool(string $name): bool
 	{
 		$ret = $this->offsetGet($name);
