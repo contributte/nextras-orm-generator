@@ -12,17 +12,17 @@ class PhpRelDoc
 	public const ASC = 1;
 	public const DESC = 2;
 
-	private ?string $type;
+	private ?string $type = null;
 
-	private ?string $entity;
+	private ?string $entity = null;
 
-	private ?string $variable;
+	private ?string $variable = null;
 
-	private ?bool $primary;
+	private ?bool $primary = null;
 
-	private ?string $orderProperty;
+	private ?string $orderProperty = null;
 
-	private ?int $orderDirection;
+	private ?int $orderDirection = null;
 
 	public function getType(): string
 	{
