@@ -66,13 +66,14 @@ class DatabaseAnalyser implements IAnalyser
 			$column->setName($col['name']);
 			$column->setNullable($col['nullable']);
 			$column->setType(Helpers::columnType($col['nativetype']));
-			$column->setDefault($col['default']);
+			$column->setDefault(is_scalar($col['default']) ? (string) $col['default'] : null);
 			$column->setOnUpdate(str_contains($col['vendor']['extra'] ?? $col['vendor']['Extra'] ?? '', 'on update'));
 
 			// Analyse ENUM
 			if ($col['nativetype'] === ColumnTypes::NATIVE_TYPE_ENUM) {
+				/** @var array<int, array<int, string>> $enum */
 				$enum = Strings::matchAll($col['vendor']['type'] ?? $col['vendor']['Type'], ColumnTypes::NATIVE_REGEX_ENUM, PREG_PATTERN_ORDER);
-				if ($enum !== []) {
+				if (isset($enum[1])) {
 					$column->setEnum($enum[1]);
 					$column->setType(ColumnTypes::TYPE_ENUM);
 					$column->setSubtype(Helpers::columnType($col['nativetype']));
