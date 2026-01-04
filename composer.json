@@ -13,21 +13,26 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "nette/database": "^3.1.9",
     "nette/php-generator": "^4.1.2",
     "nette/utils": "^4.0.3",
     "doctrine/inflector": "^2.0.8"
   },
   "require-dev": {
-    "contributte/qa": "^0.4",
-    "contributte/tester": "^0.4",
-    "contributte/phpstan": "^0.1",
+    "contributte/qa": "^0.4.0",
+    "contributte/tester": "^0.4.0",
+    "contributte/phpstan": "^0.1.0",
     "tracy/tracy": "^2.10.5"
   },
   "autoload": {
     "psr-4": {
       "Contributte\\Nextras\\Orm\\Generator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",
